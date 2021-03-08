@@ -1,56 +1,79 @@
 .tweet-container {
-    background-color: #fff;
-    font-size: 14px;
-    border: solid 1px gray;
-    min-width: 600px;
-    padding: 10px;
+  background-color: var(--app-background-color);
+  font-size: 14px;
+  border-color: var(--app-lightgray);
+  border-style: solid;
+  border-width: 1px;
+  min-width: 600px;
+  padding: 10px;
 }
 
 .tweet-container:hover {
-    background-color: lightgray;
-    cursor: pointer;
+  opacity: 0.87;
+  cursor: pointer;
 }
 
 .tweet-header {
-    display: inline-block;
-    overflow: hidden;
+  display: inline-block;
+  overflow: hidden;
 }
 
 .tweet-body {
-
 }
 
 .tweet-footer {
-
 }
 
-.tweet-account-name, .tweet-account-username, .tweet-date-posted { 
-    float: left;
-    margin: 0px 5px;
+.tweet-account-name,
+.tweet-account-username,
+.tweet-date-posted {
+  float: left;
+  margin: 0px 5px;
 }
 
 .tweet-account-name:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .tweet-account-verified {
-    margin-left: -4px;
-    float: left;
-    color: #1DA1F2;
+  margin-left: -4px;
+  float: left;
+  color: #1da1f2;
 }
 
 .tweet-image {
-    float: left;
-    width: 60px;
-    height: 60px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
+  float: left;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .profile-image {
-    display: inline;
-    margin: 0 auto;
-    height: 100%;
-    width: auto;
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.tweet-space {
+  height: 1px;
+  min-width: 600px;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  background-color: var(--app-background-color);
+  border-color: var(--app-lightgray);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tweet-container {
+    background-color: var(--app-dark-background-color);
+    border-color: var(--app-darkgray);
+  }
+
+  .tweet-space {
+    border-color: var(--app-darkgray);
+    background-color: var(--app-dark-background-color);
+  }
 }

@@ -1,7 +1,39 @@
 .timeline {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.timeline .header {
+  font-weight: bold;
+  font-size: 24px;
+  font-family: inherit;
+  text-align: left;
+  padding: 10px;
+  min-width: 600px;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  border-color: var(--app-lightgray);
+}
+
+.timeline-space {
+  height: 8px;
+  min-width: 600px;
+  padding: 10px;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  border-color: var(--app-lightgray);
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline-space {
+    border-color: var(--app-darkgray);
+    background-color: var(--app-darkgray);
+  }
+
+  .timeline .header {
+    border-color: var(--app-darkgray);
+  }
 }

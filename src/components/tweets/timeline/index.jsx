@@ -1,32 +1,36 @@
 import React, { Component } from "react";
-import Tweet from "../tweet";
+import KwetterComponentTweet from "../tweet";
+import KwetterComponentFormTweet from "../../forms/tweet";
 import "./index.css";
-import logo from '../../../assets/images/default_profile_400x400.png'
+import data from "../../../data/tweets.json";
 
-class TimeLine extends Component {
-    constructor(props) {
-        super(props);
+class KwetterComponentTimeLine extends Component {
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            tweets: [{ image: logo, accountName: "Frits van Lieshout", accountVerified: true, accountUsername: "@Fritsjhuuu21", posted: "2021-02-26 16:01:00", text: "Initial Tweet"}, { image: logo, accountName: "Frits van Lieshout", accountVerified: true, accountUsername: "@Fritsjhuuu21", posted: "2021-02-26 16:02:00", text: "Second Tweet"}, { image: logo, accountName: "Frits van Lieshout", accountVerified: true, accountUsername: "@Fritsjhuuu21", posted: "2021-03-01 16:01:00", text: "Test Tweet"}]
-        }
-    }
+    this.state = {
+      tweets: data.tweets,
+    };
+  }
 
-    render() {
-        let { tweets } = this.state;
+  render() {
+    let { tweets } = this.state;
 
-        return (
-            <div className="timeline">
-                <div>Startpagina</div>
-                {!!tweets && tweets.length > 0 ? 
-                    tweets.map((tweet, index) => (
-                        <Tweet tweet={tweet} key={index} />
-                    )) 
-                    : <div>No Feed </div>
-                }
-            </div>
-        )
-    }
+    return (
+      <div className="timeline">
+        <div className="header">Startpagina</div>
+        <KwetterComponentFormTweet />
+        <div className="timeline-space"></div>
+        {!!tweets && tweets.length > 0 ? (
+          tweets.map((tweet, index) => (
+            <KwetterComponentTweet tweet={tweet} key={index} />
+          ))
+        ) : (
+          <div>No Feed </div>
+        )}
+      </div>
+    );
+  }
 }
 
-export default TimeLine;
+export default KwetterComponentTimeLine;
