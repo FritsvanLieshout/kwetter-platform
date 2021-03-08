@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 
-import TimeLine from '../components/tweets/timeline';
+import KwetterComponentTimeLine from "../components/tweets/timeline";
 
 class HomePage extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+  }
 
-        this.state = {
-            welcome: "Welkom"
-        }
-    }
-
-    render() {
-        let { welcome } = this.state;
-
-        return <div><TimeLine /></div>
-    }
+  render() {
+    return (
+      <div>
+        <KwetterComponentTimeLine />
+      </div>
+    );
+  }
 }
 
 export default HomePage;

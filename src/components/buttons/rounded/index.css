@@ -1,0 +1,28 @@
+.button {
+  background-color: var(--app-accent-color);
+  color: #ffffff;
+  width: 90px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px;
+  border: none;
+  outline: none;
+
+  font-weight: bold;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.button:hover {
+  opacity: 0.75;
+  transition: all 0.4s ease-in-out;
+}
+
+.button:disabled {
+  opacity: 0.75;
+  cursor: default;
+}
+
+.button-rounded {
+  border-radius: 20px;
+}
