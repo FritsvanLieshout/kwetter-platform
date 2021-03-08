@@ -20,7 +20,7 @@ class KwetterComponentFormTweet extends Component {
     let { value } = this.state;
 
     return (
-      <div className="tweet-container">
+      <div className="tweet-form-container">
         <div className="tweet-header">
           <div className="tweet-image">
             <img
