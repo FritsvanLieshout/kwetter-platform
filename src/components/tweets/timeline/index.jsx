@@ -3,6 +3,7 @@ import KwetterComponentTweet from "../tweet";
 import KwetterComponentFormTweet from "../../forms/tweet";
 import "./index.css";
 import data from "../../../data/tweets.json";
+import TweetService from "../../../services/TweetService";
 
 class KwetterComponentTimeLine extends Component {
   constructor(props) {
@@ -10,7 +11,27 @@ class KwetterComponentTimeLine extends Component {
 
     this.state = {
       tweets: data.tweets,
+      error: "",
     };
+  }
+
+  componentDidMount() {
+    //this.retrieveTweets();
+  }
+
+  retrieveTweets() {
+    TweetService.retrieveAllTweets()
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          tweets: response.data,
+        });
+      })
+      .catch(() => {
+        this.setState({
+          error: "Sorry, Server Maintenance or Server Unreachable",
+        });
+      });
   }
 
   render() {
