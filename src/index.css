@@ -10,13 +10,6 @@ body {
   color: var(--app-text-color);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: var(--app-dark-background-color);
-    color: var(--app-dark-text-color);
-  }
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

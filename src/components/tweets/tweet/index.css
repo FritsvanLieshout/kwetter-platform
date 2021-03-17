@@ -3,8 +3,8 @@
   font-size: 14px;
   border-color: var(--app-lightgray);
   border-style: solid;
-  border-width: 1px;
-  min-width: 600px;
+  border-width: 2px;
+  min-width: 550px;
   padding: 10px;
 }
 
@@ -59,21 +59,19 @@
 
 .tweet-space {
   height: 1px;
-  min-width: 600px;
-  border-width: 0px 1px 0px 1px;
+  min-width: 550px;
+  border-width: 0px 2px 0px 2px;
   border-style: solid;
   background-color: var(--app-background-color);
   border-color: var(--app-lightgray);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .tweet-container {
-    background-color: var(--app-dark-background-color);
     border-color: var(--app-darkgray);
   }
 
   .tweet-space {
     border-color: var(--app-darkgray);
-    background-color: var(--app-dark-background-color);
   }
-}
+} */

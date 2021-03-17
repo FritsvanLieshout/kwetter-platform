@@ -23,16 +23,24 @@ const GlobalStyles = createGlobalStyle`
     --app-background-color: #ffffff;
     --app-text-color: #000000;
 
-    --app-dark-background-color: #111111;
-    --app-dark-text-color: #ffffff;
-
     --app-accent-color: #1da1f2;
+    --app-accent-light-color: #d5e6f0;
     --app-icon-color: #ffffff;
     --app-primary-color: #1da1f2;
     --app-secondary-color: #80c4ed;
     --app-like-color: #a83250;
-    --app-lightgray: #BAB6B9;
+    --app-lightgray: #F7F9FA;
     --app-darkgray: #202327;
+    --app-shadow-text-color: #939A9E;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html {
+    --app-background-color: #111111;
+    --app-lightgray: #202327;
+    --app-darkgray: #F7F9FA;
+    --app-text-color: #ffffff;
+    }
   }
 `;
 

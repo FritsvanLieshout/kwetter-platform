@@ -41,10 +41,11 @@ class KwetterComponentTweet extends Component {
     }
 
     if (!difference) {
-      difference = seconds + " s";
+      difference = seconds.toFixed(0) + " s";
     }
 
     return difference;
+    //return difference;
   }
 
   componentDidMount() {
