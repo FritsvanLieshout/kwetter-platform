@@ -18,12 +18,19 @@ class KwetterComponentButtonRounded extends Component {
     let endpoint = event.endpoint;
     switch (endpoint.toUpperCase()) {
       case "TWEETS":
-        TweetService.postTweet(1, event.value).then((response) => {
+        TweetService.postTweet(1, event.value).then(() => {
           document.dispatchEvent(
             new Event("time-line-refresh", {
               bubbles: true,
               composed: true,
-              detail: { response: response.data },
+              detail: {},
+            })
+          );
+          document.dispatchEvent(
+            new Event("tweet-form-clear", {
+              bubbles: true,
+              composed: true,
+              detail: {},
             })
           );
         });

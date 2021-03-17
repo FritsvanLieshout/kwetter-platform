@@ -12,6 +12,20 @@ class KwetterComponentFormTweet extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    document.addEventListener("tweet-form-clear", () => {
+      document.getElementById("tweetForm").reset();
+      this.setState({ value: "" });
+    });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("tweet-form-clear", () => {
+      document.getElementById("tweetForm").reset();
+      this.setState({ value: "" });
+    });
+  }
+
   handleChange(e) {
     const value = e.target.value;
     this.setState({ value: value });

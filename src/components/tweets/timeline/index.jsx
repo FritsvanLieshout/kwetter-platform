@@ -27,6 +27,12 @@ class KwetterComponentTimeLine extends Component {
     });
   }
 
+  componentWillUnmount() {
+    document.removeEventListener("time-line-refresh", () => {
+      this.refreshTweets();
+    });
+  }
+
   refreshTweets() {
     TweetService.retrieveAllTweets()
       .then((response) => {
