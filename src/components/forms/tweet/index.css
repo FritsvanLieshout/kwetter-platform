@@ -23,6 +23,7 @@ input {
   background-color: transparent;
   border: none;
   color: var(--app-text-color);
+  width: 400px;
 }
 
 input:focus {

@@ -63,27 +63,39 @@ class KwetterComponentTweet extends Component {
           <div className="tweet-header">
             <div className="tweet-image">
               <img
-                src={tweet.image}
-                alt={tweet.accountName}
+                src={
+                  !!tweet.image
+                    ? tweet.image
+                    : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                }
+                alt={tweet.userId}
                 className="profile-image"
               />
             </div>
-            <div className="tweet-account-name">{tweet.accountName}</div>
+            <div className="tweet-account-name">
+              <div className="tweet-account-username">
+                {tweet.account && tweet.account.name && tweet.account.surname
+                  ? tweet.account.name + " " + tweet.account.surname
+                  : "Undefined"}
+              </div>
+              <a>
+                @
+                {tweet.account && tweet.account.username
+                  ? tweet.account.username
+                  : "USER_" + tweet.userId}
+              </a>
+            </div>
             <div className="tweet-account-verified">
-              {tweet.accountVerified ? (
+              {tweet.verified ? (
                 <FontAwesomeIcon icon="check-circle" fixedWidth />
               ) : (
                 <div></div>
               )}
             </div>
-            <div className="tweet-account-username">
-              {tweet.accountUsername}
-            </div>
-
             <div className="tweet-date-posted">{difference}</div>
           </div>
           <div className="tweet-body">
-            <div className="tweet-text">{tweet.text}</div>
+            <div className="tweet-text">{tweet.message}</div>
           </div>
         </div>
         <div className="tweet-space"></div>

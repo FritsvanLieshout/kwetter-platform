@@ -66,6 +66,10 @@
   border-color: var(--app-lightgray);
 }
 
+.tweet-account-name a {
+  color: var(--app-shadow-text-color);
+  text-decoration: none;
+}
 /* @media (prefers-color-scheme: dark) {
   .tweet-container {
     border-color: var(--app-darkgray);

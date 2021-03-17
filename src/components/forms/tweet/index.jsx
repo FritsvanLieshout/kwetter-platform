@@ -41,7 +41,14 @@ class KwetterComponentFormTweet extends Component {
           </div>
         </div>
         <div className="tweet-form-button">
-          <KwetterComponentButtonRounded disabled={!value} />
+          <KwetterComponentButtonRounded
+            disabled={!value}
+            label="Tweeten"
+            event={{
+              value: value,
+              endpoint: "tweets",
+            }}
+          />
           {/* <KwetterComponentButtonTransparent endpoint="Home" /> */}
         </div>
       </div>

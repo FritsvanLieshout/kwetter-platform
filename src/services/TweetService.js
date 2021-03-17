@@ -6,14 +6,18 @@ const TWEET_API_URL = `${API_URL}/api/tweets`;
 
 class TweetService {
   async retrieveAllTweets() {
-    return await axios.get(`${TWEET_API_URL}`);
+    return await axios.get(`${TWEET_API_URL}/all`);
   }
 
   async postTweet(userId, message) {
-    return await axios.post(`${TWEET_API_URL}`, {
-      userId: userId,
-      message: message,
-    });
+    return await axios.post(
+      `${TWEET_API_URL}/tweet`,
+      {
+        userId: userId,
+        message: message,
+      },
+      { withCredentials: true }
+    );
   }
 }
 
