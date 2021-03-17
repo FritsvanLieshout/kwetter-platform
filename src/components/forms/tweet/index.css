@@ -29,9 +29,3 @@ input {
 input:focus {
   outline: none;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .tweet-form-container {
-    border-color: var(--app-darkgray);
-  }
-} */
