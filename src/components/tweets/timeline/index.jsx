@@ -10,16 +10,30 @@ class KwetterComponentTimeLine extends Component {
     super(props);
 
     this.state = {
-      tweets: data.tweets,
+      //tweets: data.tweets,
+      tweets: {},
       error: "",
     };
   }
 
-  componentDidMount() {
-    //this.retrieveTweets();
+  triggerRefresh() {
+    this.refreshTweets();
   }
 
-  retrieveTweets() {
+  componentDidMount() {
+    this.refreshTweets();
+    document.addEventListener("time-line-refresh", () => {
+      this.refreshTweets();
+    });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("time-line-refresh", () => {
+      this.refreshTweets();
+    });
+  }
+
+  refreshTweets() {
     TweetService.retrieveAllTweets()
       .then((response) => {
         console.log(response);
@@ -36,6 +50,7 @@ class KwetterComponentTimeLine extends Component {
 
   render() {
     let { tweets } = this.state;
+    console.log(tweets);
 
     return (
       <div className="timeline">
@@ -44,7 +59,11 @@ class KwetterComponentTimeLine extends Component {
         <div className="timeline-space"></div>
         {!!tweets && tweets.length > 0 ? (
           tweets.map((tweet, index) => (
-            <KwetterComponentTweet tweet={tweet} key={index} />
+            <KwetterComponentTweet
+              tweet={tweet}
+              key={index}
+              handler={this.handlerRefresh}
+            />
           ))
         ) : (
           <div>No Feed </div>

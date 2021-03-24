@@ -37,9 +37,3 @@
 .item-body {
   color: var(--app-shadow-text-color);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .card {
-    background-color: var(--app-darkgray);
-  }
-} */

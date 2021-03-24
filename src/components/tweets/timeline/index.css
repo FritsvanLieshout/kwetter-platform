@@ -26,14 +26,3 @@
   background: var(--app-lightgray);
   border-color: var(--app-lightgray);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .timeline-space {
-    border-color: var(--app-darkgray);
-    background-color: var(--app-darkgray);
-  }
-
-  .timeline .header {
-    border-color: var(--app-darkgray);
-  }
-} */

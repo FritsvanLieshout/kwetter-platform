@@ -1,0 +1,16 @@
+.sidebar-container {
+  background-color: var(--background-color);
+  height: auto;
+  float: right;
+  text-align: left;
+  padding: 16px;
+  font-size: 32px;
+}
+
+.sidebar-body a {
+  color: var(--app-text-color);
+}
+
+.sidebar-item > div {
+  margin-top: 10px;
+}

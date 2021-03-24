@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./index.css";
 
-import KwetterComponentTimeLine from "../../components/tweets/timeline";
-import KwetterComponentCard from "../../components/cards/default";
+import KwetterComponentTimeLine from "components/tweets/timeline";
+import KwetterComponentCard from "components/cards/default";
+import KwetterComponentNavBar from "components/navigation/navbar";
 
 class HomePage extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class HomePage extends Component {
   render() {
     return (
       <div className="container">
-        <div className="left">NAVBAR</div>
+        <div className="left">
+          <KwetterComponentNavBar />
+        </div>
         <div className="center">
           <KwetterComponentTimeLine />
         </div>

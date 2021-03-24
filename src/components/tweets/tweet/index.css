@@ -31,7 +31,7 @@
   margin: 0px 5px;
 }
 
-.tweet-account-name:hover {
+.tweet-account-username:hover {
   text-decoration: underline;
 }
 
@@ -66,12 +66,7 @@
   border-color: var(--app-lightgray);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  .tweet-container {
-    border-color: var(--app-darkgray);
-  }
-
-  .tweet-space {
-    border-color: var(--app-darkgray);
-  }
-} */
+.tweet-account-name a {
+  color: var(--app-shadow-text-color);
+  text-decoration: none;
+}

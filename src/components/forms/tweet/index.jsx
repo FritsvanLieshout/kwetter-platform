@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./index.css";
-import KwetterComponentButtonRounded from "../../buttons/rounded";
-import KwetterComponentButtonTransparent from "../../buttons/transparent";
+import KwetterComponentButtonRounded from "components/buttons/rounded";
 
 class KwetterComponentFormTweet extends Component {
   constructor(props) {
@@ -10,6 +9,20 @@ class KwetterComponentFormTweet extends Component {
       value: "",
     };
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener("tweet-form-clear", () => {
+      document.getElementById("tweetForm").reset();
+      this.setState({ value: "" });
+    });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("tweet-form-clear", () => {
+      document.getElementById("tweetForm").reset();
+      this.setState({ value: "" });
+    });
   }
 
   handleChange(e) {
@@ -41,8 +54,14 @@ class KwetterComponentFormTweet extends Component {
           </div>
         </div>
         <div className="tweet-form-button">
-          <KwetterComponentButtonRounded disabled={!value} />
-          {/* <KwetterComponentButtonTransparent endpoint="Home" /> */}
+          <KwetterComponentButtonRounded
+            disabled={!value}
+            label="Tweeten"
+            event={{
+              value: value,
+              endpoint: "tweets",
+            }}
+          />
         </div>
       </div>
     );

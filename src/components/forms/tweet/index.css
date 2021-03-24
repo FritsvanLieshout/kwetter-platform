@@ -23,14 +23,9 @@ input {
   background-color: transparent;
   border: none;
   color: var(--app-text-color);
+  width: 400px;
 }
 
 input:focus {
   outline: none;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .tweet-form-container {
-    border-color: var(--app-darkgray);
-  }
-} */
