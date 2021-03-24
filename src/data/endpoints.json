@@ -1,0 +1,28 @@
+{
+  "menu": [
+    {
+      "id": 1,
+      "endpoint": "",
+      "label": "Home",
+      "icon": "home"
+    },
+    {
+      "id": 2,
+      "endpoint": "explore",
+      "label": "Explore",
+      "icon": "hashtag"
+    },
+    {
+      "id": 3,
+      "endpoint": "profile",
+      "label": "Profile",
+      "icon": "user"
+    },
+    {
+      "id": 4,
+      "endpoint": "settings",
+      "label": "Settings",
+      "icon": "cog"
+    }
+  ]
+}

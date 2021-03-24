@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./index.css";
-import KwetterComponentButtonRounded from "../../buttons/rounded";
-import KwetterComponentButtonTransparent from "../../buttons/transparent";
+import KwetterComponentButtonRounded from "components/buttons/rounded";
 
 class KwetterComponentFormTweet extends Component {
   constructor(props) {
@@ -63,7 +62,6 @@ class KwetterComponentFormTweet extends Component {
               endpoint: "tweets",
             }}
           />
-          {/* <KwetterComponentButtonTransparent endpoint="Home" /> */}
         </div>
       </div>
     );

@@ -1,61 +1,140 @@
 import React, { Component } from "react";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 
 class KwetterComponentTweet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      difference: 0,
+      //difference: 0,
     };
   }
 
-  getDatePosted(date) {
-    var dateNow = new Date();
-    var datePosted = new Date(date);
-    let difference;
+  // getDatePosted(date) {
+  //   var dateNow = new Date();
+  //   var datePosted = new Date(date);
+  //   console.log(dateNow, datePosted);
+  //   let difference;
 
-    var delta = Math.abs(dateNow - datePosted) / 1000;
+  //   var delta = Math.abs(dateNow - datePosted) / 1000;
 
-    var days = Math.floor(delta / 86400);
-    delta -= days * 86400;
+  //   var days = Math.floor(delta / 86400);
+  //   delta -= days * 86400;
 
-    var hours = Math.floor(delta / 3600) % 24;
-    delta -= hours * 3600;
+  //   var hours = Math.floor(delta / 3600) % 24;
+  //   delta -= hours * 3600;
 
-    var minutes = Math.floor(delta / 60) % 60;
-    delta -= minutes * 60;
+  //   var minutes = Math.floor(delta / 60) % 60;
+  //   delta -= minutes * 60;
 
-    var seconds = delta % 60;
+  //   var seconds = delta % 60;
 
-    if (days > 0) {
-      difference = days + " d";
+  //   if (days > 0) {
+  //     difference = days + " d";
+  //   }
+
+  //   if (!difference && hours > 0) {
+  //     difference = hours + " u";
+  //   }
+
+  //   if (!difference && minutes > 0) {
+  //     difference = minutes + " m";
+  //   }
+
+  //   if (!difference) {
+  //     difference = seconds.toFixed(0) + " s";
+  //   }
+
+  //   return difference;
+  //   //return difference;
+  // }
+
+  getDatePosted(posted) {
+    let difference = 0;
+    let prefix;
+    const dateNow = new Date();
+    const datePosted = new Date(posted);
+    const months = [
+      "jan.",
+      "feb.",
+      "mrt.",
+      "apr.",
+      "jun.",
+      "jul.",
+      "aug.",
+      "sep.",
+      "okt.",
+      "nov.",
+      "dec.",
+    ];
+
+    difference = this.getDifferenceInDays(dateNow, datePosted);
+    prefix = " d";
+
+    if (difference > 7) {
+      if (datePosted.getFullYear() === dateNow.getFullYear()) {
+        difference = datePosted.getDate() + " " + months[datePosted.getMonth()];
+      } else {
+        difference =
+          datePosted.getDate() +
+          " " +
+          months[datePosted.getMonth()] +
+          " " +
+          datePosted.getFullYear();
+      }
+      prefix = undefined;
     }
 
-    if (!difference && hours > 0) {
-      difference = hours + " u";
+    if (difference < 1) {
+      difference = this.getDifferenceInHours(dateNow, datePosted);
+      prefix = " h";
+
+      if (difference < 1) {
+        difference = this.getDifferenceInMinutes(dateNow, datePosted);
+        prefix = " m";
+
+        if (difference < 1) {
+          difference = this.getDifferenceInSeconds(dateNow, datePosted);
+          prefix = " s";
+        }
+      }
     }
 
-    if (!difference && minutes > 0) {
-      difference = minutes + " m";
+    if (!!prefix) {
+      return difference.toFixed(0) + prefix;
     }
-
-    if (!difference) {
-      difference = seconds.toFixed(0) + " s";
-    }
-
     return difference;
-    //return difference;
+  }
+
+  getDifferenceInDays(dateNow, datePosted) {
+    const diffInMs = Math.abs(datePosted - dateNow);
+    return diffInMs / (1000 * 60 * 60 * 24);
+  }
+
+  getDifferenceInHours(dateNow, datePosted) {
+    const diffInMs = Math.abs(datePosted - dateNow);
+    return diffInMs / (1000 * 60 * 60);
+  }
+
+  getDifferenceInMinutes(dateNow, datePosted) {
+    const diffInMs = Math.abs(datePosted - dateNow);
+    return diffInMs / (1000 * 60);
+  }
+
+  getDifferenceInSeconds(dateNow, datePosted) {
+    const diffInMs = Math.abs(datePosted - dateNow);
+    return diffInMs / 1000;
   }
 
   componentDidMount() {
-    let diff = this.getDatePosted(this.props.tweet.posted);
-    this.setState({ difference: diff });
+    //let diff = this.getDatePosted(this.props.tweet.posted);
+    this.setState({ dateNow: new Date() });
   }
 
   render() {
     let { tweet } = this.props;
-    let { difference } = this.state;
+    let { dateNow } = this.state;
 
     return (
       <div>
@@ -92,7 +171,9 @@ class KwetterComponentTweet extends Component {
                 <div></div>
               )}
             </div>
-            <div className="tweet-date-posted">{difference}</div>
+            <div className="tweet-date-posted">
+              {this.getDatePosted(tweet.posted)}
+            </div>
           </div>
           <div className="tweet-body">
             <div className="tweet-text">{tweet.message}</div>

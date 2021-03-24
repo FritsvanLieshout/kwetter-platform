@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 
 class KwetterComponentButtonTransparent extends Component {
@@ -7,11 +8,21 @@ class KwetterComponentButtonTransparent extends Component {
   }
 
   render() {
-    let { endpoint } = this.props;
+    let { endpoint, label, icon } = this.props;
 
+    console.log(icon);
     return (
       <div>
-        <button className="button button-transparent">{endpoint}</button>
+        {icon ? (
+          <button className="button button-transparent">
+            {icon && (
+              <FontAwesomeIcon icon={icon} fixedWidth className="button-icon" />
+            )}
+            <span>{label}</span>
+          </button>
+        ) : (
+          <button className="button button-transparent">{label}</button>
+        )}
       </div>
     );
   }

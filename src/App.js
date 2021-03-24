@@ -12,21 +12,34 @@ import {
   faCheckCircle,
   faComment,
   faHeart,
+  faHome,
+  faCog,
+  faHashtag,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { createGlobalStyle } from "styled-components";
 
-library.add(fab, faCertificate, faUser, faCheckCircle, faComment, faHeart);
+library.add(
+  fab,
+  faCertificate,
+  faUser,
+  faCheckCircle,
+  faComment,
+  faHeart,
+  faHome,
+  faCog,
+  faHashtag
+);
 
 const GlobalStyles = createGlobalStyle`
   html {
     --app-background-color: #ffffff;
     --app-text-color: #000000;
 
-    --app-accent-color: #1da1f2;
-    --app-accent-light-color: #d5e6f0;
+    --app-accent-color: #55cca2;
+    --app-accent-light-color: #86f0ca;
     --app-icon-color: #ffffff;
-    --app-primary-color: #1da1f2;
+    --app-primary-color: #55cca2;
     --app-secondary-color: #80c4ed;
     --app-like-color: #a83250;
     --app-lightgray: #F7F9FA;

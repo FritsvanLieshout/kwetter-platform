@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./index.css";
-import TweetService from "../../../services/TweetService";
+import TweetService from "services/TweetService";
 
 class KwetterComponentButtonRounded extends Component {
   constructor(props) {
@@ -41,11 +41,12 @@ class KwetterComponentButtonRounded extends Component {
   }
 
   render() {
-    let { disabled, label, event } = this.props;
+    let { disabled, label, event, style } = this.props;
 
     return (
       <div>
         <button
+          style={style}
           className="button button-rounded"
           disabled={disabled}
           onClick={() => this.submit(event)}
