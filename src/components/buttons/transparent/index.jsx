@@ -10,7 +10,6 @@ class KwetterComponentButtonTransparent extends Component {
   render() {
     let { endpoint, label, icon } = this.props;
 
-    console.log(icon);
     return (
       <div>
         {icon ? (

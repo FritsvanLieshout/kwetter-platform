@@ -1,7 +1,6 @@
 import axios from "axios";
 
-//const API_URL = "https://fun4-rest-api-frits.herokuapp.com";
-const API_URL = "http://localhost:8050";
+const API_URL = process.env.REACT_APP_API_GATEWAY;
 const TWEET_API_URL = `${API_URL}/api/tweets`;
 
 class TweetService {

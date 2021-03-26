@@ -1,5 +1,4 @@
 .button {
-  background-color: var(--app-accent-color);
   color: #ffffff;
   width: 90px;
   cursor: pointer;
@@ -25,4 +24,5 @@
 
 .button-rounded {
   border-radius: 20px;
+  background-color: var(--app-accent-color);
 }
