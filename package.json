@@ -18,6 +18,8 @@
     "react-fontawesome": "^1.7.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-stomp": "^5.1.0",
+    "sockjs-client": "^1.5.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
