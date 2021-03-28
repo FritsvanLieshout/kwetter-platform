@@ -11,7 +11,9 @@ class KwetterComponentTweet extends Component {
     let difference = 0;
     let prefix;
     const dateNow = new Date();
-    const datePosted = new Date(posted);
+    let datePosted = new Date(posted);
+    datePosted = new Date(datePosted.toString());
+
     const months = [
       "jan.",
       "feb.",
@@ -98,7 +100,7 @@ class KwetterComponentTweet extends Component {
                     ? tweet.image
                     : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                 }
-                alt={tweet.userId}
+                alt={tweet.tweetUserId}
                 className="profile-image"
               />
             </div>
@@ -106,13 +108,13 @@ class KwetterComponentTweet extends Component {
               <div className="tweet-account-username">
                 {tweet.account && tweet.account.name && tweet.account.surname
                   ? tweet.account.name + " " + tweet.account.surname
-                  : "Undefined"}
+                  : "Frits van Lieshout"}
               </div>
               <a>
                 @
                 {tweet.account && tweet.account.username
                   ? tweet.account.username
-                  : "USER_" + tweet.userId}
+                  : "fritsjhuuu_" + tweet.tweetUserId}
               </a>
             </div>
             <div className="tweet-account-verified">
@@ -123,11 +125,11 @@ class KwetterComponentTweet extends Component {
               )}
             </div>
             <div className="tweet-date-posted">
-              {this.getDatePosted(tweet.posted)}
+              {this.getDatePosted(tweet.tweetPosted)}
             </div>
           </div>
           <div className="tweet-body">
-            <div className="tweet-text">{tweet.message}</div>
+            <div className="tweet-text">{tweet.tweetMessage}</div>
           </div>
         </div>
         <div className="tweet-space"></div>

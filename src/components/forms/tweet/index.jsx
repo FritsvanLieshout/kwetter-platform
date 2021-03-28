@@ -59,7 +59,7 @@ class KwetterComponentFormTweet extends Component {
             label="Tweeten"
             event={{
               object: { userId: 1, message: value },
-              endpoint: "tweets",
+              endpoint: "tweets/tweet",
             }}
           />
         </div>

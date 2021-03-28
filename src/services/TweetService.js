@@ -9,7 +9,7 @@ class TweetService {
   }
 
   async postTweet(userId, message) {
-    return await axios.post(`${TWEET_API_URL}/tweet`, {
+    return await axios.post(`${TWEET_API_URL}/post`, {
       userId: userId,
       message: message,
     });

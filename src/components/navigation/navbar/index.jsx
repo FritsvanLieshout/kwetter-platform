@@ -33,6 +33,7 @@ class KwetterComponentNavBar extends Component {
                   endpoint={item.endpoint}
                   label={item.label}
                   icon={item.icon}
+                  style={{ width: "auto" }}
                 />
               </Link>
             ))}

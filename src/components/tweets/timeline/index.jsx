@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import KwetterComponentTweet from "../tweet";
-import KwetterComponentFormTweet from "../../forms/tweet";
+import KwetterComponentTweet from "components/tweets/tweet";
+import KwetterComponentFormTweet from "components/forms/tweet";
 import "./index.css";
-import data from "../../../data/tweets.json";
-import TweetService from "../../../services/TweetService";
+//import TweetService from "../../../services/TweetService";
+import TimelineService from "services/TimelineService";
 
 class KwetterComponentTimeLine extends Component {
   constructor(props) {
@@ -17,24 +17,24 @@ class KwetterComponentTimeLine extends Component {
   }
 
   triggerRefresh() {
-    this.refreshTweets();
+    this.refreshTimeline();
   }
 
   componentDidMount() {
-    this.refreshTweets();
+    this.refreshTimeline();
     document.addEventListener("time-line-refresh", () => {
-      this.refreshTweets();
+      this.refreshTimeline();
     });
   }
 
   componentWillUnmount() {
     document.removeEventListener("time-line-refresh", () => {
-      this.refreshTweets();
+      this.refreshTimeline();
     });
   }
 
-  refreshTweets() {
-    TweetService.retrieveAllTweets()
+  refreshTimeline() {
+    TimelineService.retrieveTimeline()
       .then((response) => {
         console.log(response);
         this.setState({
