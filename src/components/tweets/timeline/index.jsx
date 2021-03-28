@@ -10,7 +10,6 @@ class KwetterComponentTimeLine extends Component {
     super(props);
 
     this.state = {
-      //tweets: data.tweets,
       tweets: {},
       error: "",
     };
@@ -22,13 +21,13 @@ class KwetterComponentTimeLine extends Component {
 
   componentDidMount() {
     this.refreshTimeline();
-    document.addEventListener("time-line-refresh", () => {
+    window.addEventListener("time-line-refresh", () => {
       this.refreshTimeline();
     });
   }
 
   componentWillUnmount() {
-    document.removeEventListener("time-line-refresh", () => {
+    window.removeEventListener("time-line-refresh", () => {
       this.refreshTimeline();
     });
   }
@@ -36,7 +35,6 @@ class KwetterComponentTimeLine extends Component {
   refreshTimeline() {
     TimelineService.retrieveTimeline()
       .then((response) => {
-        console.log(response);
         this.setState({
           tweets: response.data,
         });
@@ -48,13 +46,9 @@ class KwetterComponentTimeLine extends Component {
       });
   }
 
-  onConnected = () => {
-    console.log("Connected!!");
-  };
+  onConnected = () => {};
 
   onTweetReceived = (tweet) => {
-    console.log("New Tweet Received!!", tweet);
-
     this.setState((prevState) => ({
       tweets: [...prevState.tweets, tweet],
     }));
@@ -73,7 +67,6 @@ class KwetterComponentTimeLine extends Component {
           url={process.env.REACT_APP_SOCKET_API}
           topics={["/topic_timeline"]}
           onConnect={this.onConnected}
-          onDisconnect={console.log("Disconnected!")}
           onMessage={(msg) => this.onTweetReceived(msg)}
           debug={false}
         />
