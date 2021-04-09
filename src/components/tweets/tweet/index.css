@@ -19,9 +19,30 @@
 }
 
 .tweet-body {
+  margin-left: 70px;
+  margin-top: -20px;
 }
 
 .tweet-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  text-align: left;
+  width: 200px;
+  margin-left: 70px;
+}
+
+.tweet-footer > a {
+  font-size: 18px;
+  width: 50%;
+}
+
+.icon-heart:hover {
+  color: red;
+}
+
+.icon-share:hover {
+  color: lightskyblue;
 }
 
 .tweet-account-name,
