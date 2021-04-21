@@ -10,13 +10,15 @@ class KwetterComponentAuthForm extends Component {
     this.state = {
       username: "",
       password: "",
+      nickName: "",
       loading: false,
       message: null,
       loginSuccessful: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.loginClicked = this.loginClicked.bind(this);
+    this.login = this.login.bind(this);
+    this.register = this.register.bind(this);
   }
 
   componentDidMount() {
@@ -39,24 +41,56 @@ class KwetterComponentAuthForm extends Component {
     });
   }
 
-  async loginClicked() {
-    AuthService.signIn(this.state.username, this.state.password)
-      .then(
-        (response) => {
-          if (response.status === 200) {
-            this.setState({ loginSuccessful: true, message: null });
+  login() {
+    if (!!this.state.username && this.state.password) {
+      AuthService.signIn(this.state.username, this.state.password)
+        .then(
+          (response) => {
+            if (response.status === 200) {
+              //this.setState({ loginSuccessful: true, message: null });
+              console.log("succes");
+              //window.location.replace("http://localhost:3000/");
+            }
+          },
+          (error) => {
+            this.setState({ message: "Invalid Credentials" });
           }
-        },
-        (error) => {
-          this.setState({ message: "Invalid Credentials" });
-        }
-      )
-      .catch(() => {
-        this.setState({
-          message:
-            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+        )
+        .catch(() => {
+          this.setState({
+            message:
+              "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+          });
         });
-      });
+    }
+  }
+
+  register() {
+    if (!!this.state.username && this.state.password && this.state.nickName) {
+      AuthService.signUp(
+        this.state.username,
+        this.state.password,
+        this.state.nickName
+      )
+        .then(
+          (response) => {
+            if (response.status === 200) {
+              //this.setState({ loginSuccessful: true, message: null });
+              console.log("succes");
+              //window.location.replace("http://localhost:3000/");
+            }
+          },
+          (error) => {
+            this.setState({ message: "Invalid Credentials" });
+          }
+        )
+        .catch(() => {
+          this.setState({
+            message:
+              "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+          });
+        });
+    }
   }
 
   validatePassword(password) {
@@ -71,62 +105,76 @@ class KwetterComponentAuthForm extends Component {
   }
 
   render() {
-    let { username, password, message, loginSuccessful } = this.state;
+    let { username, password, nickName, message, loginSuccessful } = this.state;
 
-    if (loginSuccessful) {
-      window.location.replace("http://localhost:3000/");
-    }
+    // if (loginSuccessful) {
+    //   window.location.replace("http://localhost:3000/");
+    // }
 
     return (
       <div className="login-container">
         <div className="login-form-container" id="login-container">
           <div className="form-container sign-up-container">
             <form action="#" className="login-form">
-              <h1>Create Account</h1>
+              <h1>Registreren</h1>
               <input
                 className="login-input"
                 type="text"
                 placeholder="Gebruikersnaam"
                 name="username"
+                value={username}
+                onChange={this.handleChange}
               />
               <input
                 className="login-input"
                 type="text"
-                placeholder="Nicknaam"
+                placeholder="Bijnaam"
                 name="nickName"
+                value={nickName}
+                onChange={this.handleChange}
               />
               <input
                 className="login-input"
                 type="password"
                 placeholder="Wachtwoord"
                 name="password"
+                value={password}
+                onChange={this.handleChange}
               />
               <KwetterComponentButtonRounded
-                onClick={this.loginClicked}
-                disabled={!this.validatePassword(password)}
+                // disabled={!this.validatePassword(password)}
                 label="Registreren"
+                onClick={this.register}
               ></KwetterComponentButtonRounded>
             </form>
           </div>
           <div className="form-container sign-in-container">
             <form action="#" className="login-form">
-              <h1>Sign in</h1>
+              <h1>Inloggen</h1>
               <input
                 className="login-input"
                 type="text"
                 placeholder="Gebruikersnaam"
                 name="username"
+                value={username}
+                onChange={this.handleChange}
               />
               <input
                 className="login-input"
                 type="password"
                 placeholder="Wachtwoord"
                 name="password"
+                value={password}
+                onChange={this.handleChange}
               />
               <KwetterComponentButtonRounded
-                onClick={this.loginClicked}
-                disabled={!this.validatePassword(password)}
+                // disabled={!this.validatePassword(password)}
                 label="Inloggen"
+                // event={{
+                //   object: { username: username, password: password },
+                //   endpoint: "auth",
+                // }}
+                onClick={this.login}
               ></KwetterComponentButtonRounded>
             </form>
           </div>
