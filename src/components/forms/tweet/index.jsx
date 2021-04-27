@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
+import TweetService from "services/TweetService";
 
 class KwetterComponentFormTweet extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class KwetterComponentFormTweet extends Component {
       value: "",
     };
     this.handleChange = this.handleChange.bind(this);
+    this.postTweet = this.postTweet.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +30,12 @@ class KwetterComponentFormTweet extends Component {
   handleChange(e) {
     const value = e.target.value;
     this.setState({ value: value });
+  }
+
+  postTweet() {
+    TweetService.postTweet(this.state.value).then((response) =>
+      console.log(JSON.stringify(response))
+    );
   }
 
   render() {
@@ -57,10 +65,11 @@ class KwetterComponentFormTweet extends Component {
           <KwetterComponentButtonRounded
             disabled={!value}
             label="Tweeten"
-            event={{
-              object: { userId: 1, message: value },
-              endpoint: "tweets/tweet",
-            }}
+            // event={{
+            //   object: { userId: 1, message: value },
+            //   endpoint: "tweets/tweet",
+            // }}
+            onClick={this.postTweet}
           />
         </div>
       </div>

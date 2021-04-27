@@ -1,0 +1,69 @@
+.container-form-login {
+  border-radius: 20px;
+  background-color: var(--app-lightgray);
+  padding: 20px;
+  width: 33.33%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.container-form-login .btnAndLink {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.container-form-login .btnAndLink button {
+  border-radius: 2em;
+  margin-bottom: 1em;
+}
+
+.container-form-login .btnAndLink span {
+  color: rgb(62, 62, 212);
+}
+
+.container-form-login .btnAndLink span:hover {
+  color: rgb(103, 103, 230);
+}
+
+.container-form-login h1 {
+  text-align: center;
+}
+
+.alert {
+  margin-bottom: 20px;
+  color: red;
+}
+
+.container-form-login h3 {
+  text-align: center;
+}
+
+.form-label {
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.form-control {
+  width: 95%;
+  padding: 12px 10px;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: var(--app-lightgray);
+  border: 1px solid var(--app-text-color);
+  margin-top: 10px;
+}
+
+.form-redirect span {
+  font-size: 16px;
+}
+
+.form-group {
+  border: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .container-form-login {
+    width: 75%;
+  }
+}

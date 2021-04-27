@@ -48,8 +48,8 @@ class KwetterComponentAuthForm extends Component {
           (response) => {
             if (response.status === 200) {
               //this.setState({ loginSuccessful: true, message: null });
-              console.log("succes");
-              //window.location.replace("http://localhost:3000/");
+              console.log(response.headers.get("set-cookie"));
+              //window.location.replace("http://localhost:3000/home");
             }
           },
           (error) => {
@@ -115,7 +115,7 @@ class KwetterComponentAuthForm extends Component {
       <div className="login-container">
         <div className="login-form-container" id="login-container">
           <div className="form-container sign-up-container">
-            <form action="#" className="login-form">
+            <form className="login-form">
               <h1>Registreren</h1>
               <input
                 className="login-input"
@@ -149,7 +149,7 @@ class KwetterComponentAuthForm extends Component {
             </form>
           </div>
           <div className="form-container sign-in-container">
-            <form action="#" className="login-form">
+            <form className="login-form">
               <h1>Inloggen</h1>
               <input
                 className="login-input"
