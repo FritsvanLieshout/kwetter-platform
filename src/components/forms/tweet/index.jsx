@@ -33,9 +33,11 @@ class KwetterComponentFormTweet extends Component {
   }
 
   postTweet() {
-    TweetService.postTweet(this.state.value).then((response) =>
-      console.log(JSON.stringify(response))
-    );
+    TweetService.postTweet(this.state.value).then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        document.getElementById("tweetForm").reset();
+      }
+    });
   }
 
   render() {

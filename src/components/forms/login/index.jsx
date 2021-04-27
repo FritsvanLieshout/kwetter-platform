@@ -29,7 +29,8 @@ class LoginComponent extends Component {
   }
 
   async loginClicked() {
-    AuthService.signIn(this.state.username, this.state.password)
+    const password = btoa(this.state.password);
+    AuthService.signIn(this.state.username, password)
       .then(
         (response) => {
           if (response.status === 200) {
