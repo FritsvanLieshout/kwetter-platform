@@ -1,6 +1,6 @@
 .button {
   color: #ffffff;
-  width: 90px;
+  width: auto;
   cursor: pointer;
   display: inline-block;
   padding: 10px;

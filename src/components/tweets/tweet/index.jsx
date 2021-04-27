@@ -96,29 +96,33 @@ class KwetterComponentTweet extends Component {
             <div className="tweet-image">
               <img
                 src={
-                  !!tweet.image
-                    ? tweet.image
+                  tweet.tweetUser && tweet.tweetUser.profileImage
+                    ? tweet.tweetUser.profileImage
                     : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                 }
-                alt={tweet.tweetUserId}
+                alt={
+                  tweet.tweetUser && tweet.tweetUser.userId
+                    ? tweet.tweetUser.userId
+                    : 0
+                }
                 className="profile-image"
               />
             </div>
             <div className="tweet-account-name">
               <div className="tweet-account-username">
-                {tweet.account && tweet.account.name && tweet.account.surname
-                  ? tweet.account.name + " " + tweet.account.surname
-                  : "Frits van Lieshout"}
+                {tweet.tweetUser && tweet.tweetUser.nickName
+                  ? tweet.tweetUser.nickName
+                  : "Undefined"}
               </div>
               <a>
                 @
-                {tweet.account && tweet.account.username
-                  ? tweet.account.username
-                  : "fritsjhuuu_" + tweet.tweetUserId}
+                {tweet.tweetUser && tweet.tweetUser.username
+                  ? tweet.tweetUser.username
+                  : "undefined"}
               </a>
             </div>
             <div className="tweet-account-verified">
-              {tweet.verified ? (
+              {tweet.tweetUser && tweet.tweetUser.verified ? (
                 <FontAwesomeIcon icon="check-circle" fixedWidth />
               ) : (
                 <div></div>
@@ -130,6 +134,15 @@ class KwetterComponentTweet extends Component {
           </div>
           <div className="tweet-body">
             <div className="tweet-text">{tweet.tweetMessage}</div>
+          </div>
+          <div className="tweet-footer">
+            <a className="icon-heart">
+              <FontAwesomeIcon icon="heart" fixedWidth />
+              <span> {tweet.likes ? tweet.likes : 1}</span>
+            </a>
+            <a className="icon-share">
+              <FontAwesomeIcon icon="share" fixedWidth />
+            </a>
           </div>
         </div>
         <div className="tweet-space"></div>

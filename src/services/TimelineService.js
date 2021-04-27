@@ -6,7 +6,7 @@ const TIMELINE_API_URL = `${API_URL}/api/timeline`;
 class TimelineService {
   async retrieveTimeline() {
     return await axios.get(`${TIMELINE_API_URL}/all`, {
-      withCredentials: false,
+      withCredentials: true,
       headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
     });
   }

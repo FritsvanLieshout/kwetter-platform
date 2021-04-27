@@ -8,11 +8,23 @@ class TweetService {
     return await axios.get(`${TWEET_API_URL}/all`);
   }
 
-  async postTweet(userId, message) {
-    return await axios.post(`${TWEET_API_URL}/post`, {
-      userId: userId,
-      message: message,
-    });
+  //TODO
+  async postTweet(message) {
+    return await axios.post(
+      `${TWEET_API_URL}/tweet`,
+      {
+        tweetUser: {
+          userId: "123e4567-e89b-12d3-a456-426614174000",
+          username: "fritsjhuuu",
+          nickName: "Frits van Lieshout",
+          profileImage:
+            "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+          verified: true,
+        },
+        message: message,
+      },
+      { withCredentials: true }
+    );
   }
 }
 
