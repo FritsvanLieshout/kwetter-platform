@@ -63,7 +63,7 @@ class LoginComponent extends Component {
     let { username, password, message, loginSuccessful } = this.state;
 
     if (loginSuccessful) {
-      window.location.replace("http://localhost:3000/");
+      window.location.replace("http://localhost:3000/home");
     }
 
     return (
