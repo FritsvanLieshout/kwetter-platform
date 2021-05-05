@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container > div {
+  width: 33.33%;
+  height: auto;
+}
+
+.left {
+  text-align: right;
+  padding: 20px 40px;
+}
+
+.right {
+  padding: 20px 40px;
+}

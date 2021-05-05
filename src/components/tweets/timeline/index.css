@@ -1,0 +1,28 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.timeline .header {
+  font-weight: bold;
+  font-size: 24px;
+  font-family: inherit;
+  text-align: left;
+  padding: 10px;
+  min-width: 550px;
+  border-width: 0px 2px 0px 2px;
+  border-style: solid;
+  border-color: var(--app-lightgray);
+}
+
+.timeline-space {
+  height: 8px;
+  min-width: 550px;
+  padding: 10px;
+  border-width: 0px 2px 0px 2px;
+  border-style: solid;
+  background: var(--app-lightgray);
+  border-color: var(--app-lightgray);
+}

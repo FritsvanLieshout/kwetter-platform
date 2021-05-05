@@ -1,0 +1,60 @@
+{
+  "tweets": [
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-02-26 16:01:00",
+      "text": "Initial Tweet"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-02-26 16:02:00",
+      "text": "Second Tweet"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-03-01 16:01:00",
+      "text": "Test Tweet"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-03-03 09:43:00",
+      "text": "Goodmorning"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-03-03 09:57:20",
+      "text": "Yes finally got a PS5!!"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-03-08 19:14:11",
+      "text": "OMG packed Dries Mertens What IF, thanks @EA"
+    },
+    {
+      "image": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+      "accountName": "Frits van Lieshout",
+      "accountVerified": true,
+      "accountUsername": "@Frits1998",
+      "posted": "2021-03-17 09:32:50",
+      "text": "Vandaag #Verkiezingen in Nederland!"
+    }
+  ]
+}

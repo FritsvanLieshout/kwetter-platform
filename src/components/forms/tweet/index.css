@@ -1,0 +1,31 @@
+.tweet-form-container {
+  background-color: var(--app-background-color);
+  font-size: 14px;
+  border-color: var(--app-lightgray);
+  border-style: solid;
+  border-width: 2px;
+  min-width: 550px;
+  padding: 10px;
+}
+
+.tweet-form-text {
+  float: left;
+  margin: 20px 10px;
+}
+
+.tweet-form-button {
+  text-align: right;
+  padding: 2px;
+}
+
+input {
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  color: var(--app-text-color);
+  width: 400px;
+}
+
+input:focus {
+  outline: none;
+}

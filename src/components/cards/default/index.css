@@ -1,0 +1,39 @@
+.card {
+  transition: 0.3s;
+  padding: 16px;
+  text-align: center;
+  background-color: var(--app-lightgray);
+  border-radius: 20px;
+  width: 300px;
+}
+
+.card .header {
+  font-weight: bold;
+  font-size: 18px;
+  font-family: inherit;
+  text-align: left;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200, 215, 226, 0.87);
+}
+
+.item {
+  text-align: left;
+  padding: 10px 0px;
+  border-bottom: 1px solid rgba(200, 215, 226, 0.87);
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item-header {
+  font-weight: bold;
+}
+
+.item-body {
+  color: var(--app-shadow-text-color);
+}
