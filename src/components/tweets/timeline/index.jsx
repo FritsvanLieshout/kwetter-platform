@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, StrictMode } from "react";
 import KwetterComponentTweet from "components/tweets/tweet";
 import KwetterComponentFormTweet from "components/forms/tweet";
 import "./index.css";
 import SockJsClient from "react-stomp";
 import TimelineService from "services/TimelineService";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 class KwetterComponentTimeLine extends Component {
   constructor(props) {
@@ -33,17 +40,23 @@ class KwetterComponentTimeLine extends Component {
   }
 
   refreshTimeline() {
-    TimelineService.retrieveTimeline()
-      .then((response) => {
-        this.setState({
-          tweets: response.data,
+    const { user } = this.props;
+    console.log(user, this.props.user);
+    if (user !== null) {
+      TimelineService.retrieveTimeline(user.username)
+        .then((response) => {
+          this.setState({
+            tweets: response.data,
+          });
+        })
+        .catch(() => {
+          this.setState({
+            error: "Sorry, Server Maintenance or Server Unreachable",
+          });
         });
-      })
-      .catch(() => {
-        this.setState({
-          error: "Sorry, Server Maintenance or Server Unreachable",
-        });
-      });
+    } else {
+      console.log("FALSE");
+    }
   }
 
   onConnected = () => {};
@@ -82,4 +95,4 @@ class KwetterComponentTimeLine extends Component {
   }
 }
 
-export default KwetterComponentTimeLine;
+export default connect(mapStateToProps)(KwetterComponentTimeLine);
