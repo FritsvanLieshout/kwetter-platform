@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import AuthService from "services/AuthService";
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
 import "./index.css";
 

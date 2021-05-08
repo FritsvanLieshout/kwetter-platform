@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import "./index.css";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
 import TweetService from "services/TweetService";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 class KwetterComponentFormTweet extends Component {
   constructor(props) {
@@ -33,11 +40,15 @@ class KwetterComponentFormTweet extends Component {
   }
 
   postTweet() {
-    TweetService.postTweet(this.state.value).then((response) => {
-      if (response.status === 200 || response.status === 201) {
-        document.getElementById("tweetForm").reset();
-      }
-    });
+    if (this.props.user !== null) {
+      TweetService.postTweet(this.state.value, this.props.user).then(
+        (response) => {
+          if (response.status === 200 || response.status === 201) {
+            document.getElementById("tweetForm").reset();
+          }
+        }
+      );
+    }
   }
 
   render() {
@@ -79,4 +90,4 @@ class KwetterComponentFormTweet extends Component {
   }
 }
 
-export default KwetterComponentFormTweet;
+export default connect(mapStateToProps)(KwetterComponentFormTweet);

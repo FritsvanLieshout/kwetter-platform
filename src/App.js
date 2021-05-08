@@ -16,6 +16,7 @@ import {
   faCog,
   faHashtag,
   faShare,
+  faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { createGlobalStyle } from "styled-components";
@@ -30,7 +31,8 @@ library.add(
   faHome,
   faCog,
   faHashtag,
-  faShare
+  faShare,
+  faEllipsisH
 );
 
 const GlobalStyles = createGlobalStyle`

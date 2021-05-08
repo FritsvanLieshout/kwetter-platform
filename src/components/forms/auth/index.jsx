@@ -48,7 +48,6 @@ class KwetterComponentAuthForm extends Component {
           (response) => {
             if (response.status === 200) {
               //this.setState({ loginSuccessful: true, message: null });
-              console.log(response.headers.get("set-cookie"));
               //window.location.replace("http://localhost:3000/home");
             }
           },

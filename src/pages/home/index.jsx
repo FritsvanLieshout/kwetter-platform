@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setUser } from "redux/actions";
+import { setUser, setFollowing, setFollowers } from "redux/actions";
 import AuthService from "services/AuthService";
+import FollowService from "services/FollowService";
 import "./index.css";
 
 import KwetterComponentTimeLine from "components/tweets/timeline";
@@ -11,8 +12,11 @@ import KwetterComponentNavBar from "components/navigation/navbar";
 function mapDispatchToProps(dispatch) {
   return {
     setUser: (user) => dispatch(setUser(user)),
+    setFollowing: (following) => dispatch(setFollowing(following)),
+    setFollowers: (followers) => dispatch(setFollowers(followers)),
   };
 }
+
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -30,12 +34,52 @@ class HomePage extends Component {
     AuthService.getUser()
       .then(
         (response) => {
-          console.log(response.status);
           if (response.status === 200 || response.status === 201) {
             this.props.setUser(response.data);
+            this.initFollowers(response.data.username);
+            this.initFollowing(response.data.username);
             this.setState({ userFetched: true, message: null });
           }
-          console.log(response.data);
+        },
+        (error) => {
+          this.setState({ message: error.response.data.message });
+        }
+      )
+      .catch(() => {
+        this.setState({
+          message:
+            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+        });
+      });
+  }
+
+  initFollowers(username) {
+    FollowService.getFollowers(username)
+      .then(
+        (response) => {
+          if (response.status === 200) {
+            this.props.setFollowers(response.data);
+          }
+        },
+        (error) => {
+          this.setState({ message: error.response.data.message });
+        }
+      )
+      .catch(() => {
+        this.setState({
+          message:
+            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+        });
+      });
+  }
+
+  initFollowing(username) {
+    FollowService.getFollowing(username)
+      .then(
+        (response) => {
+          if (response.status === 200) {
+            this.props.setFollowing(response.data);
+          }
         },
         (error) => {
           this.setState({ message: error.response.data.message });

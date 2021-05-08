@@ -10,6 +10,15 @@ class TimelineService {
       headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
     });
   }
+
+  async retrieveOwnTweets(username) {
+    return await axios.get(
+      `${TIMELINE_API_URL}/own/tweets?username=` + username,
+      {
+        withCredentials: true,
+      }
+    );
+  }
 }
 
 export default new TimelineService();
