@@ -28,6 +28,23 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.fetchUser();
+    window.addEventListener("init-followers", (event) => {
+      console.log(event.detail);
+      this.initFollowers(event.detail.username);
+    });
+    window.addEventListener("init-following", (event) => {
+      console.log(event.detail);
+      this.initFollowing(event.detail.username);
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("init-followers", () => {
+      this.initFollowing(null);
+    });
+    window.removeEventListener("init-following", () => {
+      this.initFollowing(null);
+    });
   }
 
   fetchUser() {

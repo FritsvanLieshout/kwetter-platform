@@ -4,7 +4,14 @@ import AuthService from "services/AuthService";
 import FollowService from "services/FollowService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
+import { setFollowing } from "redux/actions";
 import "./index.css";
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setFollowing: (following) => dispatch(setFollowing(following)),
+  };
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -148,6 +155,7 @@ class KwetterComponentProfileHeader extends Component {
           if (response.status === 200) {
             //REFRESH followers
             console.log("user followed");
+            this.refreshFollowing(this.props.user.username);
           }
         });
       } else {
@@ -158,10 +166,33 @@ class KwetterComponentProfileHeader extends Component {
           if (response.status === 200) {
             //REFRESH followers
             console.log("user unfollowed");
+            this.refreshFollowing(this.props.user.username);
           }
         });
       }
     }
+  }
+
+  refreshFollowing(username) {
+    FollowService.getFollowing(username)
+      .then(
+        (response) => {
+          if (response.status === 200) {
+            console.log("setFollowing");
+            this.props.setFollowing(response.data);
+            this.initProfile(this.props.username);
+          }
+        },
+        (error) => {
+          this.setState({ message: error.response.data.message });
+        }
+      )
+      .catch(() => {
+        this.setState({
+          message:
+            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+        });
+      });
   }
 
   render() {
@@ -242,4 +273,7 @@ class KwetterComponentProfileHeader extends Component {
   }
 }
 
-export default connect(mapStateToProps)(KwetterComponentProfileHeader);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KwetterComponentProfileHeader);
