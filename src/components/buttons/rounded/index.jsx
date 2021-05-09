@@ -55,24 +55,22 @@ class KwetterComponentButtonRounded extends Component {
       );
     });
   }
-
   render() {
-    let { disabled, label, event, style, onClick, icon } = this.props;
+    let { disabled, label, event, style, onClick, icon, hover } = this.props;
 
     return (
       <div>
         <button
           style={style}
-          className="button button-rounded"
+          className={"button button-rounded " + (hover ? "button-hover" : "")}
           disabled={disabled}
           onClick={onClick}
         >
-          {!!icon && !!icon !== null ? (
+          {!!icon && !!icon !== null && (
             <FontAwesomeIcon icon={icon} fixedWidth />
-          ) : (
-            <div></div>
           )}
-          {label}
+          <span className="button-label-1">{label}</span>
+          <span className="button-label-2">{hover ? "Ontvolg" : label}</span>
         </button>
       </div>
     );

@@ -17,6 +17,14 @@
   transition: all 0.4s ease-in-out;
 }
 
+.button:hover .button-label-1 {
+  display: none;
+}
+
+.button:hover .button-label-2 {
+  display: inline;
+}
+
 .button:disabled {
   opacity: 0.75;
   cursor: default;
@@ -25,4 +33,12 @@
 .button-rounded {
   border-radius: 20px;
   background-color: var(--app-accent-color);
+}
+
+.button-label-1 {
+  display: inline;
+}
+
+.button-label-2 {
+  display: none;
 }

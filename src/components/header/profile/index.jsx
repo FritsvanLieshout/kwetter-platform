@@ -159,7 +159,7 @@ class KwetterComponentProfileHeader extends Component {
           }
         });
       } else {
-        FollowService.followUser(
+        FollowService.unFollowUser(
           this.props.user.username,
           this.props.username
         ).then((response) => {
@@ -219,6 +219,7 @@ class KwetterComponentProfileHeader extends Component {
               {!ownProfile ? (
                 <div>
                   <KwetterComponentButtonRounded
+                    hover={alreadyFollowingUser}
                     label={alreadyFollowingUser ? "Volgend" : "Volgen"}
                     onClick={() => this.followClicked(alreadyFollowingUser)}
                     style={{
