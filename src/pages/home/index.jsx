@@ -8,6 +8,7 @@ import "./index.css";
 import KwetterComponentTimeLine from "components/tweets/timeline";
 import KwetterComponentCard from "components/cards/default";
 import KwetterComponentNavBar from "components/navigation/navbar";
+import KwetterComponentTweetModal from "components/modals/tweet";
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -121,6 +122,7 @@ class HomePage extends Component {
           </div>
           <div className="center">
             <KwetterComponentTimeLine />
+            <KwetterComponentTweetModal />
           </div>
           <div className="right">
             <KwetterComponentCard />

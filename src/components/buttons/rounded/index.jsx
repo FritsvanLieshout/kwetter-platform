@@ -69,8 +69,8 @@ class KwetterComponentButtonRounded extends Component {
           {!!icon && !!icon !== null && (
             <FontAwesomeIcon icon={icon} fixedWidth />
           )}
-          <span className="button-label-1">{label}</span>
-          <span className="button-label-2">{hover ? "Ontvolg" : label}</span>
+          <div className="button-label-1">{label}</div>
+          <div className="button-label-2">{hover ? "Ontvolg" : label}</div>
         </button>
       </div>
     );

@@ -25,6 +25,16 @@ class KwetterComponentNavBar extends Component {
     this.setState({ menu: data.menu });
   }
 
+  openModal() {
+    window.dispatchEvent(
+      new CustomEvent("open-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  }
+
   render() {
     let { menu } = this.state;
     let { user } = this.props;
@@ -64,6 +74,7 @@ class KwetterComponentNavBar extends Component {
               )
             )}
           <KwetterComponentButtonRounded
+            onClick={this.openModal}
             label="Tweeten"
             style={{
               fontSize: "22px",

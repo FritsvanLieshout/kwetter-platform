@@ -36,9 +36,23 @@ class KwetterComponentProfileHeader extends Component {
 
   componentDidMount() {
     if (
-      this.props.username != null ||
-      (this.props.username != undefined && this.props.user != null)
+      this.props.username !== null ||
+      (this.props.username !== undefined && this.props.user !== null)
     ) {
+      if (this.props.username === this.props.user.username) {
+        this.setState({ ownProfile: true });
+        this.initOwnProfile();
+      } else {
+        this.setState({ ownProfile: false });
+        this.initProfile(this.props.username);
+      }
+    }
+  }
+
+  componentDidUpdate(oldProps) {
+    const newProps = this.props;
+
+    if (oldProps.username !== newProps.username) {
       if (this.props.username === this.props.user.username) {
         this.setState({ ownProfile: true });
         this.initOwnProfile();
@@ -153,8 +167,6 @@ class KwetterComponentProfileHeader extends Component {
           this.props.username
         ).then((response) => {
           if (response.status === 200) {
-            //REFRESH followers
-            console.log("user followed");
             this.refreshFollowing(this.props.user.username);
           }
         });
@@ -164,8 +176,6 @@ class KwetterComponentProfileHeader extends Component {
           this.props.username
         ).then((response) => {
           if (response.status === 200) {
-            //REFRESH followers
-            console.log("user unfollowed");
             this.refreshFollowing(this.props.user.username);
           }
         });
@@ -178,7 +188,6 @@ class KwetterComponentProfileHeader extends Component {
       .then(
         (response) => {
           if (response.status === 200) {
-            console.log("setFollowing");
             this.props.setFollowing(response.data);
             this.initProfile(this.props.username);
           }
@@ -198,7 +207,6 @@ class KwetterComponentProfileHeader extends Component {
   render() {
     let { following, followers, user, userFetched, ownProfile } = this.state;
     const alreadyFollowingUser = this.checkIfUserFollowAccount();
-    console.log(alreadyFollowingUser);
 
     if (userFetched) {
       return (

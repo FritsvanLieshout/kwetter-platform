@@ -37,8 +37,10 @@
 
 .button-label-1 {
   display: inline;
+  color: var(--app-text-color);
 }
 
 .button-label-2 {
   display: none;
+  color: var(--app-text-color);
 }
