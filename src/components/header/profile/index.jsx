@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
 import { setFollowing } from "redux/actions";
 import "./index.css";
+import KwetterComponentProfileModal from "components/modals/profile";
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -204,6 +205,17 @@ class KwetterComponentProfileHeader extends Component {
       });
   }
 
+  openModal() {
+    console.log("OPEN THIS");
+    window.dispatchEvent(
+      new CustomEvent("open-profile-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  }
+
   render() {
     let { following, followers, user, userFetched, ownProfile } = this.state;
     const alreadyFollowingUser = this.checkIfUserFollowAccount();
@@ -239,15 +251,18 @@ class KwetterComponentProfileHeader extends Component {
                   />
                 </div>
               ) : (
-                <KwetterComponentButtonRounded
-                  label="Profiel instellen"
-                  style={{
-                    fontSize: "16px",
-                    width: "150px",
-                    borderRadius: "50px",
-                    padding: "12px",
-                  }}
-                />
+                <div>
+                  <KwetterComponentButtonRounded
+                    label="Profiel instellen"
+                    onClick={this.openModal}
+                    style={{
+                      fontSize: "16px",
+                      width: "150px",
+                      borderRadius: "50px",
+                      padding: "12px",
+                    }}
+                  />
+                </div>
               )}
             </div>
             <div className="profile-account-name">
@@ -277,6 +292,7 @@ class KwetterComponentProfileHeader extends Component {
               </div>
             </div>
           </div>
+          <KwetterComponentProfileModal />
         </div>
       );
     } else {

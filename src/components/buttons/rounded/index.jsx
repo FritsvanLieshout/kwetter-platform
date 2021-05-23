@@ -16,28 +16,6 @@ class KwetterComponentButtonRounded extends Component {
 
   getServiceEndpoint(event) {
     let endpoint = event.endpoint;
-
-    // if (endpoint === "auth") {
-    //   AuthService.signIn(event.object.username, event.object.password)
-    //     .then(
-    //       (response) => {
-    //         if (response.status === 200) {
-    //           //this.setState({ loginSuccessful: true, message: null });
-    //           console.log("succes");
-    //           //window.location.replace("http://localhost:3000/");
-    //         }
-    //       },
-    //       (error) => {
-    //         this.setState({ message: "Invalid Credentials" });
-    //       }
-    //     )
-    //     .catch(() => {
-    //       this.setState({
-    //         message:
-    //           "Sorry, Server Unavailable. Please contact us or check your internet connection!",
-    //       });
-    //     });
-    // } else {
     CrudService.post(endpoint, event.object).then(() => {
       window.dispatchEvent(
         new Event("time-line-refresh", {
@@ -56,7 +34,7 @@ class KwetterComponentButtonRounded extends Component {
     });
   }
   render() {
-    let { disabled, label, event, style, onClick, icon, hover } = this.props;
+    let { disabled, label, style, onClick, icon, hover } = this.props;
 
     return (
       <div>

@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 import "./index.css";
-import KwetterComponentFormTweet from "components/forms/tweet";
+import KwetterComponentFormProfile from "components/forms/profile";
 
-class KwetterComponentTweetModal extends Component {
+class KwetterComponentProfileModal extends Component {
   componentDidMount() {
-    window.addEventListener("open-modal", () => {
+    window.addEventListener("open-profile-modal", () => {
       this.openModel();
     });
-    window.addEventListener("close-modal", () => {
+    window.addEventListener("close-profile-modal", () => {
       this.closeModel();
     });
   }
 
   openModel() {
-    var modal = document.getElementById("tweet-modal");
+    console.log("OPEN THIS FUCKING MODAL");
+    var modal = document.getElementById("profile-modal");
     modal.style.display = "block";
   }
 
   closeModel() {
-    var modal = document.getElementById("tweet-modal");
+    var modal = document.getElementById("profile-modal");
     modal.style.display = "none";
   }
 
   render() {
-    const { t, username } = this.props;
-
     return (
       <div>
-        <div id="tweet-modal" className="modal-container">
+        <div id="profile-modal" className="modal-container">
           <div className="modal-items">
             <div className="modal-top">
+              <span className="modal-title">Profiel wijzigen</span>
               <span className="modal-close" onClick={() => this.closeModel()}>
                 &times;
               </span>
             </div>
             <div className="modal-body">
-              <KwetterComponentFormTweet username={username} />
+              <KwetterComponentFormProfile />
             </div>
           </div>
         </div>
@@ -44,4 +44,4 @@ class KwetterComponentTweetModal extends Component {
   }
 }
 
-export default KwetterComponentTweetModal;
+export default KwetterComponentProfileModal;
