@@ -20,7 +20,7 @@ class KwetterComponentTweetModal extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, username } = this.props;
 
     return (
       <div>
@@ -32,7 +32,7 @@ class KwetterComponentTweetModal extends Component {
               </span>
             </div>
             <div className="modal-body">
-              <KwetterComponentFormTweet />
+              <KwetterComponentFormTweet username={username} />
             </div>
           </div>
         </div>

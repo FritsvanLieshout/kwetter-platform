@@ -27,7 +27,9 @@ class ProfilePage extends Component {
             key={this.props.match.params.username + "1"}
             username={this.props.match.params.username}
           />
-          <KwetterComponentTweetModal />
+          <KwetterComponentTweetModal
+            username={this.props.match.params.username}
+          />
         </div>
         <div className="right">
           <KwetterComponentCard />

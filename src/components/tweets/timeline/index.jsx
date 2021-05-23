@@ -36,6 +36,9 @@ class KwetterComponentTimeLine extends Component {
   componentDidMount() {
     if (!!this.props.endpoint && this.props.endpoint === "profile") {
       this.retrieveOwnTweets(this.props.username);
+      window.addEventListener("refresh-own-tweets", () => {
+        this.retrieveOwnTweets(this.props.user.username);
+      });
     } else {
       this.refreshTimeline();
       window.addEventListener("time-line-refresh", () => {

@@ -265,6 +265,9 @@ class KwetterComponentProfileHeader extends Component {
             <div className="profile-username">
               @{user.username ? user.username : "undefined"}
             </div>
+            <div className="profile-bio">
+              {user.biography ? user.biography : ""}
+            </div>
             <div className="profile-follow">
               <div className="follow">
                 <b>{following.count ? following.count : 0}</b> Volgend

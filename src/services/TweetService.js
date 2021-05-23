@@ -9,20 +9,14 @@ class TweetService {
   }
 
   //TODO
-  async postTweet(message, user) {
+  async postTweet(message, user, mentions, hashtags) {
     return await axios.post(
       `${TWEET_API_URL}/tweet`,
       {
-        // tweetUser: {
-        //   userId: "123e4567-e89b-12d3-a456-426614174000",
-        //   username: "PSV",
-        //   nickName: "PSV Eindhoven",
-        //   profileImage:
-        //     "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
-        //   verified: true,
-        // },
         tweetUser: user,
         message: message,
+        mentions: mentions,
+        hashtags: hashtags,
       },
       { withCredentials: true }
     );

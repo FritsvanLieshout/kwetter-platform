@@ -130,7 +130,7 @@ class HomePage extends Component {
         </div>
       );
     } else {
-      return <div>NOOOOO</div>; //Loading
+      return <div>Loading...</div>; //Loading
     }
   }
 }

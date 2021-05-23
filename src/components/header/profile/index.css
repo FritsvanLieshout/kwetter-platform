@@ -1,7 +1,7 @@
 .profile-container {
   background-image: linear-gradient(
-    var(--app-lightgray) 50%,
-    var(--app-background-color) 50%
+    var(--app-lightgray) 20%,
+    var(--app-background-color) 80%
   );
   font-size: 14px;
   border-color: var(--app-lightgray);
@@ -9,7 +9,7 @@
   border-width: 2px;
   min-width: 550px;
   padding: 10px;
-  height: auto;
+  height: 250px;
 }
 
 .main-profile-image {
@@ -36,11 +36,17 @@
   font-size: 16px;
 }
 
+.profile-bio {
+  color: var(--app-text-color);
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px 0px;
+}
+
 .profile-follow {
   width: auto;
   overflow: hidden;
   font-size: 16px;
-  margin-top: 10px;
 }
 
 .profile-follow > div {
@@ -65,5 +71,5 @@
 
 .profile-button {
   float: right;
-  margin-top: -20px;
+  margin-top: -10px;
 }

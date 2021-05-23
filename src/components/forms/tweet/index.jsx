@@ -15,6 +15,8 @@ class KwetterComponentFormTweet extends Component {
     super(props);
     this.state = {
       value: "",
+      mentions: null,
+      hashtags: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.postTweet = this.postTweet.bind(this);
@@ -36,18 +38,67 @@ class KwetterComponentFormTweet extends Component {
 
   handleChange(e) {
     const value = e.target.value;
+    this.handleMentions(value);
+    this.handleHashtags(value);
     this.setState({ value: value });
+  }
+
+  handleMentions(text) {
+    var pattern = /\B@[a-z0-9_-]+/gi;
+    var mentions = text.match(pattern);
+    let mentionString = [];
+
+    if (!!mentions && mentions.length > 0) {
+      for (var mention of mentions) {
+        var username = mention.split("@").pop();
+        if (!mentionString.includes(username)) {
+          mentionString = [...mentionString, username];
+        }
+      }
+      this.setState({ mentions: mentionString.join() });
+    }
+  }
+
+  handleHashtags(text) {
+    var pattern = /\B#[a-z0-9_-]+/gi;
+    var hashtags = text.match(pattern);
+    let hashtagString = [];
+
+    if (!!hashtags && hashtags.length > 0) {
+      for (var hashtag of hashtags) {
+        var tag = hashtag.split("#").pop();
+        if (!hashtagString.includes(tag)) {
+          hashtagString = [...hashtagString, tag];
+        }
+      }
+      this.setState({ hashtags: hashtagString.join() });
+    }
   }
 
   postTweet() {
     if (this.props.user !== null) {
-      TweetService.postTweet(this.state.value, this.props.user).then(
-        (response) => {
-          if (response.status === 200 || response.status === 201) {
-            document.getElementById("tweetForm").reset();
+      TweetService.postTweet(
+        this.state.value,
+        this.props.user,
+        this.state.mentions,
+        this.state.hashtags
+      ).then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          if (
+            this.props.username !== null &&
+            this.props.username === this.props.user.username
+          ) {
+            window.dispatchEvent(
+              new Event("refresh-own-tweets", {
+                bubbles: true,
+                composed: true,
+                detail: {},
+              })
+            );
           }
+          document.getElementById("tweetForm").reset();
         }
-      );
+      });
     }
   }
 
