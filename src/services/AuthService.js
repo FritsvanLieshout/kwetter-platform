@@ -26,6 +26,16 @@ class AuthService {
       { withCredentials: true }
     );
   }
+
+  async getUser() {
+    return await axios.get(`${USER_API_URL}/me`, { withCredentials: true });
+  }
+
+  async fetchUser(username) {
+    return await axios.get(`${USER_API_URL}/status?username=` + username, {
+      withCredentials: true,
+    });
+  }
 }
 
 export default new AuthService();

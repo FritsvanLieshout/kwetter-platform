@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 class KwetterComponentTweet extends Component {
   constructor(props) {
@@ -92,7 +93,10 @@ class KwetterComponentTweet extends Component {
     return (
       <div>
         <div className="tweet-container">
-          <div className="tweet-header">
+          <Link
+            to={"/profile/" + tweet.tweetUser.username}
+            className="tweet-header"
+          >
             <div className="tweet-image">
               <img
                 src={
@@ -131,7 +135,7 @@ class KwetterComponentTweet extends Component {
             <div className="tweet-date-posted">
               {this.getDatePosted(tweet.tweetPosted)}
             </div>
-          </div>
+          </Link>
           <div className="tweet-body">
             <div className="tweet-text">{tweet.tweetMessage}</div>
           </div>

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
-import TweetService from "services/TweetService";
 import CrudService from "services/CrudService";
-import AuthService from "services/AuthService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class KwetterComponentButtonRounded extends Component {
   constructor(props) {
@@ -56,19 +55,22 @@ class KwetterComponentButtonRounded extends Component {
       );
     });
   }
-
   render() {
-    let { disabled, label, event, style, onClick } = this.props;
+    let { disabled, label, event, style, onClick, icon, hover } = this.props;
 
     return (
       <div>
         <button
           style={style}
-          className="button button-rounded"
+          className={"button button-rounded " + (hover ? "button-hover" : "")}
           disabled={disabled}
           onClick={onClick}
         >
-          {label}
+          {!!icon && !!icon !== null && (
+            <FontAwesomeIcon icon={icon} fixedWidth />
+          )}
+          <div className="button-label-1">{label}</div>
+          <div className="button-label-2">{hover ? "Ontvolg" : label}</div>
         </button>
       </div>
     );

@@ -1,10 +1,14 @@
 .sidebar-container {
   background-color: var(--background-color);
-  height: auto;
-  float: right;
+  height: 100vh;
+  /*float: right;*/
   text-align: left;
   padding: 16px;
   font-size: 32px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 20%;
 }
 
 .sidebar-body a {
@@ -13,4 +17,10 @@
 
 .sidebar-item > div {
   margin-top: 10px;
+}
+
+.sidebar-footer {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 10px;
 }
