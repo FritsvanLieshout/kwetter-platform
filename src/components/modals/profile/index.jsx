@@ -13,7 +13,6 @@ class KwetterComponentProfileModal extends Component {
   }
 
   openModel() {
-    console.log("OPEN THIS FUCKING MODAL");
     var modal = document.getElementById("profile-modal");
     modal.style.display = "block";
   }

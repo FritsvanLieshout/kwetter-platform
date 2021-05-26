@@ -8,12 +8,12 @@ class KwetterComponentButtonTransparent extends Component {
   }
 
   render() {
-    let { endpoint, label, icon } = this.props;
+    let { endpoint, label, icon, onClick } = this.props;
 
     return (
       <div>
         {icon ? (
-          <button className="button button-transparent">
+          <button className="button button-transparent" onClick={onClick}>
             {icon && (
               <FontAwesomeIcon icon={icon} fixedWidth className="button-icon" />
             )}

@@ -27,6 +27,13 @@
       "unique": false,
       "label": "Settings",
       "icon": "cog"
+    },
+    {
+      "id": 5,
+      "endpoint": "logout",
+      "unique": false,
+      "label": "Logout",
+      "icon": "sign-out-alt"
     }
   ]
 }

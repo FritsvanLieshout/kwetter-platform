@@ -111,6 +111,12 @@ class KwetterComponentProfileHeader extends Component {
               message: null,
             });
           }
+          if (response.status === 204) {
+            this.setState({
+              following: {},
+              message: null,
+            });
+          }
         },
         (error) => {
           this.setState({ message: error.response.data.message });
@@ -131,6 +137,13 @@ class KwetterComponentProfileHeader extends Component {
           if (response.status === 200) {
             this.setState({
               following: response.data,
+              message: null,
+            });
+          }
+
+          if (response.status === 204) {
+            this.setState({
+              following: {},
               message: null,
             });
           }
@@ -177,6 +190,7 @@ class KwetterComponentProfileHeader extends Component {
           this.props.username
         ).then((response) => {
           if (response.status === 200) {
+            console.log(this.props.user.username);
             this.refreshFollowing(this.props.user.username);
           }
         });
@@ -190,6 +204,10 @@ class KwetterComponentProfileHeader extends Component {
         (response) => {
           if (response.status === 200) {
             this.props.setFollowing(response.data);
+            this.initProfile(this.props.username);
+          }
+          if (response.status === 204) {
+            this.props.setFollowing(null);
             this.initProfile(this.props.username);
           }
         },
@@ -206,7 +224,6 @@ class KwetterComponentProfileHeader extends Component {
   }
 
   openModal() {
-    console.log("OPEN THIS");
     window.dispatchEvent(
       new CustomEvent("open-profile-modal", {
         bubbles: true,

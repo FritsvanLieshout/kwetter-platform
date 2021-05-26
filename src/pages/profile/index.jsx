@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "./index.css";
 import KwetterComponentProfileHeader from "components/header/profile";
 import KwetterComponentTimeLine from "components/tweets/timeline";
-import KwetterComponentCard from "components/cards/default";
+import KwetterComponentMentionCard from "components/cards/mention";
 import KwetterComponentNavBar from "components/navigation/navbar";
 import KwetterComponentTweetModal from "components/modals/tweet";
+import KwetterComponentAlertModal from "components/modals/alert";
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -30,9 +31,16 @@ class ProfilePage extends Component {
           <KwetterComponentTweetModal
             username={this.props.match.params.username}
           />
+          <KwetterComponentAlertModal
+            title="Account verwijderen"
+            warning="weet u zeker dat u uw account wilt verwijderen"
+            label="Verwijder"
+          />
         </div>
         <div className="right">
-          <KwetterComponentCard />
+          <KwetterComponentMentionCard
+            username={this.props.match.params.username}
+          />
         </div>
       </div>
     );

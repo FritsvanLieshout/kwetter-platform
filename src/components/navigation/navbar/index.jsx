@@ -6,6 +6,7 @@ import KwetterComponentProfileNavbar from "components/navigation/profile";
 import data from "data/endpoints.json";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import AuthService from "services/AuthService";
 
 const mapStateToProps = (state) => {
   return {
@@ -35,12 +36,21 @@ class KwetterComponentNavBar extends Component {
     );
   }
 
+  logout() {
+    AuthService.logout().then((res) => {
+      if (res.status === 200 || res.status === 404 || res.status === 302) {
+        console.log(res.data);
+      }
+      window.localStorage.removeItem("persist:root");
+      window.location.replace("http://localhost:3000/signin");
+    });
+  }
+
   render() {
     let { menu } = this.state;
     let { user } = this.props;
 
     //TODO user info below in navbar
-
     return (
       <div className="sidebar-container">
         <div className="sidebar-header">Kwetter</div>
@@ -61,6 +71,16 @@ class KwetterComponentNavBar extends Component {
                     style={{ width: "auto" }}
                   />
                 </Link>
+              ) : item.endpoint === "logout" ? (
+                <div className="sidebar-item">
+                  <KwetterComponentButtonTransparent
+                    key={item.id}
+                    label={item.label}
+                    icon={item.icon}
+                    style={{ width: "auto" }}
+                    onClick={this.logout}
+                  />
+                </div>
               ) : (
                 <Link to={item.endpoint} className="sidebar-item">
                   <KwetterComponentButtonTransparent

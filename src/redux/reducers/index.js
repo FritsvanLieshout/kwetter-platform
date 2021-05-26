@@ -4,6 +4,7 @@ import {
   SET_FOLLOWING,
   SET_FOLLOWERS,
   SET_OWN_TWEETS,
+  SET_LIKES,
 } from "redux/actions";
 
 const initialState = {
@@ -40,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ownTweets: action.ownTweets,
+      };
+    case SET_LIKES:
+      return {
+        ...state,
+        likes: action.likes,
       };
     default:
       return state;

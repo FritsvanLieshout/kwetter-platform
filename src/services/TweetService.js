@@ -8,7 +8,6 @@ class TweetService {
     return await axios.get(`${TWEET_API_URL}/all`);
   }
 
-  //TODO
   async postTweet(message, user, mentions, hashtags) {
     return await axios.post(
       `${TWEET_API_URL}/tweet`,
@@ -20,6 +19,12 @@ class TweetService {
       },
       { withCredentials: true }
     );
+  }
+
+  async retrieveMentions(username) {
+    return await axios.get(`${TWEET_API_URL}/mentions?username=${username}`, {
+      withCredentials: true,
+    });
   }
 }
 

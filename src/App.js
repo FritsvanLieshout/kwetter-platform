@@ -17,6 +17,7 @@ import {
   faHashtag,
   faShare,
   faEllipsisH,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { createGlobalStyle } from "styled-components";
@@ -32,7 +33,8 @@ library.add(
   faCog,
   faHashtag,
   faShare,
-  faEllipsisH
+  faEllipsisH,
+  faSignOutAlt
 );
 
 const GlobalStyles = createGlobalStyle`

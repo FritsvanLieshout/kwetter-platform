@@ -27,12 +27,34 @@ class AuthService {
     );
   }
 
+  async logout() {
+    return await axios.put(`${AUTH_API_URL}/logout`, "", {
+      withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+      },
+    });
+  }
+
   async getUser() {
     return await axios.get(`${USER_API_URL}/me`, { withCredentials: true });
   }
 
   async fetchUser(username) {
     return await axios.get(`${USER_API_URL}/status?username=` + username, {
+      withCredentials: true,
+    });
+  }
+
+  async updateUser(user) {
+    return await axios.put(`${USER_API_URL}/edit`, user, {
+      withCredentials: true,
+    });
+  }
+
+  async deleteUser(user) {
+    return await axios.delete(`${USER_API_URL}/permanent/remove`, {
+      data: user,
       withCredentials: true,
     });
   }

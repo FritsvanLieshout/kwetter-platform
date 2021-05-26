@@ -95,18 +95,19 @@ class KwetterComponentFormTweet extends Component {
                 detail: {},
               })
             );
-            window.dispatchEvent(
-              new Event("close-modal", {
-                bubbles: true,
-                composed: true,
-                detail: {},
-              })
-            );
           }
           document.getElementById("tweetForm").reset();
         }
       });
     }
+
+    window.dispatchEvent(
+      new CustomEvent("close-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
   }
 
   render() {

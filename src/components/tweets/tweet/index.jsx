@@ -2,10 +2,37 @@ import React, { Component } from "react";
 import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setLikes } from "redux/actions";
+import LikeService from "services/LikeService";
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setLikes: (likes) => dispatch(setLikes(likes)),
+  };
+}
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    likes: state.likes,
+  };
+};
 
 class KwetterComponentTweet extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      alreadyLiked: false,
+      likeCount: 0,
+    };
+  }
+
+  componentDidMount() {
+    if (!!this.props && !!this.props.tweet) {
+      this.checkIfAlreadyLiked(this.props.tweet.id);
+      this.checkTweetLikeCount(this.props.tweet.id);
+    }
   }
 
   getDatePosted(posted) {
@@ -87,15 +114,71 @@ class KwetterComponentTweet extends Component {
     return diffInMs / 1000;
   }
 
+  checkIfAlreadyLiked(tweetId) {
+    const likes = this.props.likes;
+    if (!!likes && likes.length > 0) {
+      for (var like of likes) {
+        console.log(like + ", " + tweetId);
+        if (like === tweetId) {
+          this.setState({ alreadyLiked: true });
+        }
+      }
+    }
+  }
+
+  checkTweetLikeCount(tweetId) {
+    LikeService.getLikesByTweet(tweetId).then((response) => {
+      if (response.status === 200) {
+        this.setState({ likeCount: response.data });
+      }
+    });
+  }
+
+  actionLike(tweetId, alreadyLiked) {
+    if (alreadyLiked) {
+      LikeService.unLikeTweet(this.props.user.userId, tweetId).then(
+        (response) => {
+          if (response.status === 200 || response.status === 204) {
+            console.log("Gedisliked");
+            this.setState({ alreadyLiked: false });
+            LikeService.getUserLikes(this.props.user.userId).then((res) => {
+              if (res.status === 200) {
+                this.props.setLikes(res.data);
+                this.checkTweetLikeCount(this.props.tweet.id);
+              }
+            });
+          }
+        }
+      );
+    } else {
+      LikeService.likeTweet(this.props.user.userId, tweetId).then(
+        (response) => {
+          if (response.status === 200 || response.status === 204) {
+            console.log("Liked");
+            this.setState({ alreadyLiked: true });
+            LikeService.getUserLikes(this.props.user.userId).then((res) => {
+              if (res.status === 200) {
+                this.props.setLikes(res.data);
+                this.checkTweetLikeCount(this.props.tweet.id);
+              }
+            });
+          }
+        }
+      );
+    }
+  }
+
   render() {
-    let { tweet } = this.props;
+    let { likeCount, alreadyLiked } = this.state;
+    let { tweet, style, mention } = this.props;
 
     return (
       <div>
-        <div className="tweet-container">
+        <div className="tweet-container" style={style}>
           <Link
             to={"/profile/" + tweet.tweetUser.username}
             className="tweet-header"
+            style={mention ? { display: "flex" } : {}}
           >
             <div className="tweet-image">
               <img
@@ -133,19 +216,35 @@ class KwetterComponentTweet extends Component {
               )}
             </div>
             <div className="tweet-date-posted">
-              {this.getDatePosted(tweet.tweetPosted)}
+              {this.getDatePosted(
+                tweet.tweetPosted
+                  ? tweet.tweetPosted
+                  : tweet.posted
+                  ? tweet.posted
+                  : null
+              )}
             </div>
           </Link>
-          <div className="tweet-body">
-            <div className="tweet-text">{tweet.tweetMessage}</div>
+          <div
+            className="tweet-body"
+            style={mention ? { textAlign: "left" } : {}}
+          >
+            <div className="tweet-text">
+              {tweet.tweetMessage
+                ? tweet.tweetMessage
+                : tweet.message
+                ? tweet.message
+                : ""}
+            </div>
           </div>
           <div className="tweet-footer">
-            <a className="icon-heart">
+            <a
+              className="icon-heart"
+              style={{ color: alreadyLiked ? "red" : "" }}
+              onClick={() => this.actionLike(tweet.id, alreadyLiked)}
+            >
               <FontAwesomeIcon icon="heart" fixedWidth />
-              <span> {tweet.likes ? tweet.likes : 1}</span>
-            </a>
-            <a className="icon-share">
-              <FontAwesomeIcon icon="share" fixedWidth />
+              <span> {likeCount}</span>
             </a>
           </div>
         </div>
@@ -155,4 +254,7 @@ class KwetterComponentTweet extends Component {
   }
 }
 
-export default KwetterComponentTweet;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KwetterComponentTweet);

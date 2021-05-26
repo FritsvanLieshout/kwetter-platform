@@ -3,12 +3,20 @@ import "./index.css";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
 import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
+import AuthService from "services/AuthService";
+import { setUser } from "redux/actions";
 
 const mapStateToProps = (state) => {
   return {
     user: state.user,
   };
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUser: (user) => dispatch(setUser(user)),
+  };
+}
 
 class KwetterComponentFormProfile extends Component {
   constructor(props) {
@@ -17,7 +25,7 @@ class KwetterComponentFormProfile extends Component {
       biography: null,
       nickName: null,
     };
-    this.save = this.save.bind(this);
+    this.editUser = this.editUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -39,12 +47,57 @@ class KwetterComponentFormProfile extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    console.log(this.state.nickName);
   }
 
-  save() {}
+  editUser() {
+    let user = this.props.user;
+    if (this.state.nickName !== null) {
+      user.nickName = this.state.nickName;
+    }
+    if (this.state.biography !== null) {
+      user.biography = this.state.biography;
+    }
+
+    AuthService.updateUser(user)
+      .then((response) => {
+        if (response.status === 200) {
+          this.props.setUser(response.data);
+          window.dispatchEvent(
+            new CustomEvent("close-profile-modal", {
+              bubbles: true,
+              composed: true,
+              detail: {},
+            })
+          );
+        }
+      })
+      .catch(() => {
+        this.setState({
+          message:
+            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+        });
+      });
+  }
+
+  openModal() {
+    window.dispatchEvent(
+      new CustomEvent("close-profile-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+    window.dispatchEvent(
+      new CustomEvent("open-alert-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
+    );
+  }
 
   render() {
-    let { biography, nickName } = this.state;
     let { user } = this.props;
 
     return (
@@ -52,8 +105,8 @@ class KwetterComponentFormProfile extends Component {
         <div className="container-form-edit">
           <Formik
             initialValues={{
-              biography,
-              nickName,
+              biography: user.biography,
+              nickName: user.nickName,
             }}
             onSubmit={this.save}
             validateOnChange={false}
@@ -69,8 +122,8 @@ class KwetterComponentFormProfile extends Component {
                     className="form-control"
                     type="text"
                     name="nickName"
-                    value={user.nickName ? user.nickName : ""}
-                    onChange={this.handleChange}
+                    value={props.values.nickName}
+                    onKeyUp={this.handleChange}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -79,8 +132,8 @@ class KwetterComponentFormProfile extends Component {
                     className="form-control"
                     type="text"
                     name="biography"
-                    value={user.biography ? user.biography : ""}
-                    onChange={this.handleChange}
+                    value={props.values.biography}
+                    onKeyUp={this.handleChange}
                   />
                 </fieldset>
               </Form>
@@ -88,12 +141,13 @@ class KwetterComponentFormProfile extends Component {
           </Formik>
           <div className="profile-btn">
             <KwetterComponentButtonRounded
-              onClick={this.save}
+              onClick={this.editUser}
               label="Opslaan"
               style={{ width: "150px" }}
             />
           </div>
           <KwetterComponentButtonRounded
+            onClick={this.openModal}
             label="Verwijder account"
             style={{ width: "200px", background: "red" }}
           />
@@ -103,4 +157,7 @@ class KwetterComponentFormProfile extends Component {
   }
 }
 
-export default connect(mapStateToProps)(KwetterComponentFormProfile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KwetterComponentFormProfile);

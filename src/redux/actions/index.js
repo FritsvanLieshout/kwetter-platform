@@ -3,6 +3,7 @@ export const SET_TIMELINE = "SET_TIMELINE";
 export const SET_FOLLOWING = "SET_FOLLOWING";
 export const SET_FOLLOWERS = "SET_FOLLOWERS";
 export const SET_OWN_TWEETS = "SET_OWN_TWEETS";
+export const SET_LIKES = "SET_LIKES";
 
 export const setTimeline = (timeline) => {
   return {
@@ -36,5 +37,12 @@ export const setOwnTweets = (ownTweets) => {
   return {
     type: SET_OWN_TWEETS,
     ownTweets,
+  };
+};
+
+export const setLikes = (likes) => {
+  return {
+    type: SET_LIKES,
+    likes,
   };
 };
