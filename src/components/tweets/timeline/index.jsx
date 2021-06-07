@@ -1,4 +1,4 @@
-import React, { Component, StrictMode } from "react";
+import React, { Component } from "react";
 import KwetterComponentTweet from "components/tweets/tweet";
 import KwetterComponentFormTweet from "components/forms/tweet";
 import "./index.css";
@@ -6,6 +6,9 @@ import SockJsClient from "react-stomp";
 import TimelineService from "services/TimelineService";
 import { connect } from "react-redux";
 import { setTimeline, setOwnTweets } from "redux/actions";
+import { Client } from "@stomp/stompjs";
+
+const WEB_SOCKET_URL = process.env.REACT_APP_SOCKET_API;
 
 const mapStateToProps = (state) => {
   return {
@@ -30,6 +33,7 @@ class KwetterComponentTimeLine extends Component {
       tweets: {},
       error: "",
       onUpdate: false,
+      messages: null,
     };
   }
 
@@ -45,6 +49,7 @@ class KwetterComponentTimeLine extends Component {
         this.refreshTimeline();
       });
     }
+    //this.initWebsockets();
   }
 
   componentWillUnmount() {
@@ -52,6 +57,35 @@ class KwetterComponentTimeLine extends Component {
       this.refreshTimeline();
     });
   }
+
+  // initWebsockets() {
+  //   let onConnected = () => {
+  //     console.log("Connected!!");
+  //     client.subscribe("/queue/timeline", function (msg) {
+  //       if (msg.body) {
+  //         var jsonBody = JSON.parse(msg.body);
+  //         if (jsonBody.message) {
+  //           this.setState({ messages: jsonBody.message });
+  //         }
+  //       }
+  //     });
+  //   };
+
+  //   let onDisconnected = () => {
+  //     console.log("Disconnected!!");
+  //   };
+
+  //   const client = new Client({
+  //     brokerURL: WEB_SOCKET_URL,
+  //     reconnectDelay: 5000,
+  //     heartbeatIncoming: 4000,
+  //     heartbeatOutgoing: 4000,
+  //     onConnect: onConnected,
+  //     onDisconnect: onDisconnected,
+  //   });
+
+  //   client.activate();
+  // }
 
   refreshTimeline() {
     const { user, timeline } = this.props;
@@ -101,18 +135,21 @@ class KwetterComponentTimeLine extends Component {
     //}
   }
 
-  onConnected = () => {};
+  onConnected = () => {
+    console.log("connected!");
+  };
 
-  onTweetReceived = (tweet) => {
-    this.setState((prevState) => ({
-      tweets: [...prevState.tweets, tweet],
-    }));
+  onTweetReceived = (message) => {
+    // this.setState((prevState) => ({
+    //   tweets: [...prevState.tweets, tweet],
+    // }));
+    console.log(message);
     this.setState({ onUpdate: true });
     this.refreshTimeline();
   };
 
   render() {
-    let { tweets } = this.state;
+    let { tweets, messages } = this.state;
     let { endpoint } = this.props;
 
     return (
@@ -124,11 +161,12 @@ class KwetterComponentTimeLine extends Component {
             <div className="timeline-space"></div>
             <SockJsClient
               url={process.env.REACT_APP_SOCKET_API}
-              topics={["/topic_timeline"]}
+              topics={["/queue/timeline"]}
               onConnect={this.onConnected}
               onMessage={(msg) => this.onTweetReceived(msg)}
               debug={false}
             />
+            <div>{messages}</div>
           </div>
         ) : (
           <div></div>

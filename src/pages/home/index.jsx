@@ -169,5 +169,4 @@ class HomePage extends Component {
   }
 }
 
-const TimeLine = connect(null, mapDispatchToProps)(HomePage);
-export default TimeLine;
+export default connect(null, mapDispatchToProps)(HomePage);
