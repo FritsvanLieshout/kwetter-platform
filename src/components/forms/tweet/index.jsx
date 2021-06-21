@@ -17,6 +17,7 @@ class KwetterComponentFormTweet extends Component {
       value: "",
       mentions: null,
       hashtags: null,
+      message: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.postTweet = this.postTweet.bind(this);
@@ -99,6 +100,8 @@ class KwetterComponentFormTweet extends Component {
           document.getElementById("tweetForm").reset();
         }
       });
+      if (response.status === 204) {
+      }
     }
 
     window.dispatchEvent(
@@ -111,7 +114,7 @@ class KwetterComponentFormTweet extends Component {
   }
 
   render() {
-    let { value } = this.state;
+    let { value, message } = this.state;
 
     return (
       <div className="tweet-form-container">
@@ -143,6 +146,9 @@ class KwetterComponentFormTweet extends Component {
             // }}
             onClick={this.postTweet}
           />
+        </div>
+        <div className="alert" role="alert">
+          {message}
         </div>
       </div>
     );
