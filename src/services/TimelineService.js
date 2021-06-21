@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_GATEWAY;
+const API_URL = "http://20.86.242.50:8050";
 const TIMELINE_API_URL = `${API_URL}/api/timeline`;
 
 class TimelineService {
