@@ -41,7 +41,7 @@ class KwetterComponentFormTweet extends Component {
     const value = e.target.value;
     this.handleMentions(value);
     this.handleHashtags(value);
-    this.setState({ value: value });
+    this.setState({ value: value, message: null });
   }
 
   handleMentions(text) {
@@ -99,9 +99,10 @@ class KwetterComponentFormTweet extends Component {
           }
           document.getElementById("tweetForm").reset();
         }
+        if (response.status === 204) {
+          this.setState({ message: "Tweet cannot be posted!" });
+        }
       });
-      if (response.status === 204) {
-      }
     }
 
     window.dispatchEvent(
