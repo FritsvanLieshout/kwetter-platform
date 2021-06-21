@@ -2,27 +2,38 @@
   "menu": [
     {
       "id": 1,
-      "endpoint": "",
+      "endpoint": "/home",
+      "unique": false,
       "label": "Home",
       "icon": "home"
     },
     {
       "id": 2,
-      "endpoint": "explore",
+      "endpoint": "/explore",
+      "unique": false,
       "label": "Explore",
       "icon": "hashtag"
     },
     {
       "id": 3,
-      "endpoint": "profile",
+      "endpoint": "/profile",
+      "unique": true,
       "label": "Profile",
       "icon": "user"
     },
     {
       "id": 4,
-      "endpoint": "settings",
+      "endpoint": "/settings",
+      "unique": false,
       "label": "Settings",
       "icon": "cog"
+    },
+    {
+      "id": 5,
+      "endpoint": "logout",
+      "unique": false,
+      "label": "Logout",
+      "icon": "sign-out-alt"
     }
   ]
 }

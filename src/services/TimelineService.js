@@ -1,14 +1,23 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_GATEWAY;
+const API_URL = "http://20.86.242.50:8050";
 const TIMELINE_API_URL = `${API_URL}/api/timeline`;
 
 class TimelineService {
-  async retrieveTimeline() {
-    return await axios.get(`${TIMELINE_API_URL}/all`, {
+  async retrieveTimeline(username) {
+    return await axios.get(`${TIMELINE_API_URL}/unique?username=` + username, {
       withCredentials: true,
       headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
     });
+  }
+
+  async retrieveOwnTweets(username) {
+    return await axios.get(
+      `${TIMELINE_API_URL}/own/tweets?username=` + username,
+      {
+        withCredentials: true,
+      }
+    );
   }
 }
 

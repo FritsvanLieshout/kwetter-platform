@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_GATEWAY;
+const API_URL = "http://20.86.242.50:8050";
 const TWEET_API_URL = `${API_URL}/api/tweets`;
 
 class TweetService {
@@ -8,23 +8,23 @@ class TweetService {
     return await axios.get(`${TWEET_API_URL}/all`);
   }
 
-  //TODO
-  async postTweet(message) {
+  async postTweet(message, user, mentions, hashtags) {
     return await axios.post(
       `${TWEET_API_URL}/tweet`,
       {
-        tweetUser: {
-          userId: "123e4567-e89b-12d3-a456-426614174000",
-          username: "fritsjhuuu",
-          nickName: "Frits van Lieshout",
-          profileImage:
-            "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
-          verified: true,
-        },
+        tweetUser: user,
         message: message,
+        mentions: mentions,
+        hashtags: hashtags,
       },
       { withCredentials: true }
     );
+  }
+
+  async retrieveMentions(username) {
+    return await axios.get(`${TWEET_API_URL}/mentions?username=${username}`, {
+      withCredentials: true,
+    });
   }
 }
 

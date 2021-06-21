@@ -1,0 +1,6 @@
+.modal-title {
+  color: var(--app-text-color);
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+}

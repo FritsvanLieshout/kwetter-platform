@@ -2,12 +2,22 @@ import React, { Component } from "react";
 import "./index.css";
 import KwetterComponentButtonRounded from "components/buttons/rounded";
 import TweetService from "services/TweetService";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 class KwetterComponentFormTweet extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: "",
+      mentions: null,
+      hashtags: null,
+      message: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.postTweet = this.postTweet.bind(this);
@@ -29,17 +39,83 @@ class KwetterComponentFormTweet extends Component {
 
   handleChange(e) {
     const value = e.target.value;
-    this.setState({ value: value });
+    this.handleMentions(value);
+    this.handleHashtags(value);
+    this.setState({ value: value, message: null });
+  }
+
+  handleMentions(text) {
+    var pattern = /\B@[a-z0-9_-]+/gi;
+    var mentions = text.match(pattern);
+    let mentionString = [];
+
+    if (!!mentions && mentions.length > 0) {
+      for (var mention of mentions) {
+        var username = mention.split("@").pop();
+        if (!mentionString.includes(username)) {
+          mentionString = [...mentionString, username];
+        }
+      }
+      this.setState({ mentions: mentionString.join() });
+    }
+  }
+
+  handleHashtags(text) {
+    var pattern = /\B#[a-z0-9_-]+/gi;
+    var hashtags = text.match(pattern);
+    let hashtagString = [];
+
+    if (!!hashtags && hashtags.length > 0) {
+      for (var hashtag of hashtags) {
+        var tag = hashtag.split("#").pop();
+        if (!hashtagString.includes(tag)) {
+          hashtagString = [...hashtagString, tag];
+        }
+      }
+      this.setState({ hashtags: hashtagString.join() });
+    }
   }
 
   postTweet() {
-    TweetService.postTweet(this.state.value).then((response) =>
-      console.log(JSON.stringify(response))
+    if (this.props.user !== null) {
+      TweetService.postTweet(
+        this.state.value,
+        this.props.user,
+        this.state.mentions,
+        this.state.hashtags
+      ).then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          if (
+            this.props.username !== null &&
+            this.props.username === this.props.user.username
+          ) {
+            window.dispatchEvent(
+              new Event("refresh-own-tweets", {
+                bubbles: true,
+                composed: true,
+                detail: {},
+              })
+            );
+          }
+          document.getElementById("tweetForm").reset();
+        }
+        if (response.status === 204) {
+          this.setState({ message: "Tweet cannot be posted!" });
+        }
+      });
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("close-modal", {
+        bubbles: true,
+        composed: true,
+        detail: {},
+      })
     );
   }
 
   render() {
-    let { value } = this.state;
+    let { value, message } = this.state;
 
     return (
       <div className="tweet-form-container">
@@ -72,9 +148,12 @@ class KwetterComponentFormTweet extends Component {
             onClick={this.postTweet}
           />
         </div>
+        <div className="alert" role="alert">
+          {message}
+        </div>
       </div>
     );
   }
 }
 
-export default KwetterComponentFormTweet;
+export default connect(mapStateToProps)(KwetterComponentFormTweet);

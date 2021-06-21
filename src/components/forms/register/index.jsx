@@ -51,11 +51,9 @@ class RegisterComponent extends Component {
     AuthService.signUp(this.state.username, password, this.state.nickName)
       .then(
         (response) => {
-          console.log(response.status);
           if (response.status === 200 || response.status === 201) {
             this.setState({ registerSuccessful: true, message: null });
           }
-          console.log(response.data);
         },
         (error) => {
           this.setState({ message: error.response.data.message });

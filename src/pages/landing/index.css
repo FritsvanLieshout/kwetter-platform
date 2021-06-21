@@ -1,0 +1,41 @@
+.landing-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.landing-left {
+  background-color: var(--app-accent-color);
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-span-title {
+  font-size: 56px;
+  font-weight: bolder;
+}
+
+.landing-span-description {
+  font-size: 36px;
+}
+
+.landing-right {
+  width: 45%;
+  background-color: var(--app-background-color);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 80vh;
+  padding-left: 16px;
+  justify-content: center;
+}
+
+.landing-buttons {
+  padding-top: 32px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 360px;
+}

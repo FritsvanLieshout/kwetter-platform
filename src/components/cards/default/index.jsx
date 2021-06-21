@@ -6,24 +6,26 @@ class KwetterComponentCard extends Component {
     super(props);
   }
 
+  retrieveItems(trends) {
+    if (!!trends && trends.length > 0) {
+      return trends.map((item) => (
+        <div className="item">
+          <div className="item-header">{item.trend}</div>
+          <div className="item-body">
+            {item.count} {item.count > 1 ? "Tweets" : "Tweet"}
+          </div>
+        </div>
+      ));
+    }
+  }
+
   render() {
+    let { items } = this.props;
+    console.log(items);
     return (
       <div className="card">
         <div className="header">Trends voor jou</div>
-        <div className="items">
-          <div className="item">
-            <div className="item-header">#Testsamenleving</div>
-            <div className="item-body">14.613 Tweets</div>
-          </div>
-          <div className="item">
-            <div className="item-header">Champions League</div>
-            <div className="item-body">11.006 Tweets</div>
-          </div>
-          <div className="item">
-            <div className="item-header">Playstation5</div>
-            <div className="item-body">4.590 Tweets</div>
-          </div>
-        </div>
+        <div className="items">{this.retrieveItems(items)}</div>
       </div>
     );
   }

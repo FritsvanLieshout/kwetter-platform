@@ -16,6 +16,7 @@
 .tweet-header {
   display: inline-block;
   overflow: hidden;
+  color: var(--app-text-color);
 }
 
 .tweet-body {
@@ -27,8 +28,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-  text-align: left;
-  width: 200px;
+  text-align: center;
+  width: 150%;
   margin-left: 70px;
 }
 
@@ -90,4 +91,8 @@
 .tweet-account-name a {
   color: var(--app-shadow-text-color);
   text-decoration: none;
+}
+
+.follow-button:hover::before {
+  content: "Ontvolg";
 }
