@@ -12,6 +12,12 @@ import KwetterComponentTweetModal from "components/modals/tweet";
 import TrendingService from "services/TrendingService";
 import LikeService from "services/LikeService";
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return {
     setUser: (user) => dispatch(setUser(user)),
@@ -32,7 +38,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.fetchUser();
+    this.fetchData();
     this.fetchTrendingItems();
     window.addEventListener("init-followers", (event) => {
       this.initFollowers(event.detail.username);
@@ -51,29 +57,38 @@ class HomePage extends Component {
     });
   }
 
-  fetchUser() {
-    AuthService.getUser()
-      .then(
-        (response) => {
-          if (response.status === 200 || response.status === 201) {
-            this.props.setUser(response.data);
-            this.initFollowers(response.data.username);
-            this.initFollowing(response.data.username);
-            this.initLikes(response.data.userId);
-            this.setState({ userFetched: true, message: null });
-          }
-        },
-        (error) => {
-          this.setState({ message: error.response.data.message });
-        }
-      )
-      .catch(() => {
-        this.setState({
-          message:
-            "Sorry, Server Unavailable. Please contact us or check your internet connection!",
-        });
-      });
+  fetchData() {
+    if (!!this.props.user) {
+      this.initFollowers(this.props.user.username);
+      this.initFollowing(this.props.user.username);
+      this.initLikes(this.props.user.userId);
+      this.setState({ userFetched: true, message: null });
+    }
   }
+
+  // fetchUser() {
+  //   AuthService.getUser()
+  //     .then(
+  //       (response) => {
+  //         if (response.status === 200 || response.status === 201) {
+  //           this.props.setUser(response.data);
+  //           this.initFollowers(response.data.username);
+  //           this.initFollowing(response.data.username);
+  //           this.initLikes(response.data.userId);
+  //           this.setState({ userFetched: true, message: null });
+  //         }
+  //       },
+  //       (error) => {
+  //         this.setState({ message: error.response.data.message });
+  //       }
+  //     )
+  //     .catch(() => {
+  //       this.setState({
+  //         message:
+  //           "Sorry, Server Unavailable. Please contact us or check your internet connection!",
+  //       });
+  //     });
+  // }
 
   initFollowers(username) {
     FollowService.getFollowers(username)
@@ -169,4 +184,4 @@ class HomePage extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -11,10 +11,6 @@ const mapStateToProps = (state) => {
 };
 
 class KwetterComponentAlertModal extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     window.addEventListener("open-alert-modal", () => {
       this.openModel();

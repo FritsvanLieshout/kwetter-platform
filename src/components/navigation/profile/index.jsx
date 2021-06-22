@@ -10,10 +10,6 @@ const mapStateToProps = (state) => {
 };
 
 class KwetterComponentProfileNavbar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let { user } = this.props;
 

@@ -23,7 +23,12 @@ class AuthService {
         username: username,
         password: password,
       },
-      { withCredentials: true }
+      {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+        },
+      }
     );
   }
 

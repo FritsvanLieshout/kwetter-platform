@@ -3,12 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 
 class KwetterComponentButtonTransparent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    let { endpoint, label, icon, onClick } = this.props;
+    let { label, icon, onClick } = this.props;
 
     return (
       <div>
