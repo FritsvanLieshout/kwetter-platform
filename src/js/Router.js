@@ -6,7 +6,8 @@ import LoginComponent from "components/forms/login";
 import RegisterComponent from "components/forms/register";
 import ProfilePage from "pages/profile";
 import PrivateRoute from "./PrivateRoute";
-import ModeratorPage from "pages/moderator";
+import DashboardPage from "pages/dashboard";
+import ForbiddenPage from "pages/forbidden";
 
 const roles = {
   User: "KWETTER_USER",
@@ -25,18 +26,20 @@ const Router = () => (
       <Route path="/" exact component={LandingPage} />
       <Route path="/signin" exact component={LoginComponent} />
       <Route path="/signup" exact component={RegisterComponent} />
+      <Route path="/forbidden" exact component={ForbiddenPage} />
       <PrivateRoute
         roles={[roles.User, roles.Moderator]}
         path="/profile/:username"
         exact
         component={ProfilePage}
       />
-      <PrivateRoute
+      {/* <PrivateRoute
         roles={[roles.Moderator]}
-        path="/mod/overview"
+        path="/dashboard"
         exact
-        component={ModeratorPage}
-      />
+        component={DashboardPage}
+      /> */}
+      <Route path="/dashboard" exact component={DashboardPage} />
     </Switch>
   </BrowserRouter>
 );

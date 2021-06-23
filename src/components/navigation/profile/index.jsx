@@ -13,27 +13,31 @@ class KwetterComponentProfileNavbar extends Component {
   render() {
     let { user } = this.props;
 
-    return (
-      <div>
-        <div className="profile-header">
-          <div className="profile-account-name">
-            <div className="profile-account-username">
-              {user.nickName ? user.nickName : "Undefined"}
+    if (!!user) {
+      return (
+        <div>
+          <div className="profile-header">
+            <div className="profile-account-name">
+              <div className="profile-account-username">
+                {user.nickName ? user.nickName : "Undefined"}
+              </div>
+              <div className="profile-account-verified">
+                {user.verified ? (
+                  <FontAwesomeIcon icon="check-circle" fixedWidth />
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
-            <div className="profile-account-verified">
-              {user.verified ? (
-                <FontAwesomeIcon icon="check-circle" fixedWidth />
-              ) : (
-                <div></div>
-              )}
+            <div className="profile-username">
+              @{user.username ? user.username : "undefined"}
             </div>
-          </div>
-          <div className="profile-username">
-            @{user.username ? user.username : "undefined"}
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 

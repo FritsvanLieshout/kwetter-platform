@@ -1,39 +1,52 @@
 {
   "menu": [
     {
+      "id": 0,
+      "endpoint": "/dashboard",
+      "unique": false,
+      "label": "Dashboard",
+      "icon": "tachometer-alt",
+      "roles": ["KWETTER_ADMIN"]
+    },
+    {
       "id": 1,
       "endpoint": "/home",
       "unique": false,
       "label": "Home",
-      "icon": "home"
+      "icon": "home",
+      "roles": ["KWETTER_USER"]
     },
     {
       "id": 2,
       "endpoint": "/explore",
       "unique": false,
       "label": "Explore",
-      "icon": "hashtag"
+      "icon": "hashtag",
+      "roles": ["KWETTER_USER"]
     },
     {
       "id": 3,
       "endpoint": "/profile",
       "unique": true,
       "label": "Profile",
-      "icon": "user"
+      "icon": "user",
+      "roles": ["KWETTER_USER"]
     },
     {
       "id": 4,
       "endpoint": "/settings",
       "unique": false,
       "label": "Settings",
-      "icon": "cog"
+      "icon": "cog",
+      "roles": ["KWETTER_USER", "KWETTER_ADMIN"]
     },
     {
       "id": 5,
       "endpoint": "logout",
       "unique": false,
       "label": "Logout",
-      "icon": "sign-out-alt"
+      "icon": "sign-out-alt",
+      "roles": ["KWETTER_USER", "KWETTER_ADMIN"]
     }
   ]
 }

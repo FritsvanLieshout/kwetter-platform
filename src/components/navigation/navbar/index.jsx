@@ -48,62 +48,76 @@ class KwetterComponentNavBar extends Component {
 
   render() {
     let { menu } = this.state;
-    let { user } = this.props;
+    //let { user } = this.props;
+
+    const user = { role: "KWETTER_ADMIN" };
+    console.log(user);
 
     //TODO user info below in navbar
     return (
       <div className="sidebar-container">
         <div className="sidebar-header">Kwetter</div>
         <div className="sidebar-body">
-          {menu &&
-            menu.length > 0 &&
+          {!!user && user !== null ? (
+            menu &&
             menu.map((item) =>
-              item.unique === true && user != null ? (
-                <Link
-                  to={item.endpoint + "/" + user.username}
-                  className="sidebar-item"
-                >
-                  <KwetterComponentButtonTransparent
-                    key={item.id}
-                    endpoint={item.endpoint}
-                    label={item.label}
-                    icon={item.icon}
-                    style={{ width: "auto" }}
-                  />
-                </Link>
-              ) : item.endpoint === "logout" ? (
-                <div className="sidebar-item">
-                  <KwetterComponentButtonTransparent
-                    key={item.id}
-                    label={item.label}
-                    icon={item.icon}
-                    style={{ width: "auto" }}
-                    onClick={this.logout}
-                  />
-                </div>
+              item.roles.includes(user.role) ? (
+                (item.unique === true && (
+                  <Link
+                    to={item.endpoint + "/" + user.username}
+                    className="sidebar-item"
+                  >
+                    <KwetterComponentButtonTransparent
+                      key={item.id}
+                      endpoint={item.endpoint}
+                      label={item.label}
+                      icon={item.icon}
+                      style={{ width: "auto" }}
+                    />
+                  </Link>
+                ),
+                item.endpoint === "logout" && (
+                  <div className="sidebar-item">
+                    <KwetterComponentButtonTransparent
+                      key={item.id}
+                      label={item.label}
+                      icon={item.icon}
+                      style={{ width: "auto" }}
+                      onClick={this.logout}
+                    />
+                  </div>
+                ),
+                (
+                  <Link to={item.endpoint} className="sidebar-item">
+                    <KwetterComponentButtonTransparent
+                      key={item.id}
+                      endpoint={item.endpoint}
+                      label={item.label}
+                      icon={item.icon}
+                      style={{ width: "auto" }}
+                    />
+                  </Link>
+                ))
               ) : (
-                <Link to={item.endpoint} className="sidebar-item">
-                  <KwetterComponentButtonTransparent
-                    key={item.id}
-                    endpoint={item.endpoint}
-                    label={item.label}
-                    icon={item.icon}
-                    style={{ width: "auto" }}
-                  />
-                </Link>
+                <div></div>
               )
-            )}
-          <KwetterComponentButtonRounded
-            onClick={this.openModal}
-            label="Tweeten"
-            style={{
-              fontSize: "22px",
-              width: "200px",
-              borderRadius: "50px",
-              padding: "12px",
-              marginTop: "50px",
-            }}
-          />
+            )
+          ) : (
+            <div></div>
+          )}
+          {!!user && user.role === "KWETTER_USER" && (
+            <KwetterComponentButtonRounded
+              onClick={this.openModal}
+              label="Tweeten"
+              style={{
+                fontSize: "22px",
+                width: "200px",
+                borderRadius: "50px",
+                padding: "12px",
+                marginTop: "50px",
+              }}
+            />
+          )}
         </div>
         <div className="sidebar-footer">
           <KwetterComponentProfileNavbar />
