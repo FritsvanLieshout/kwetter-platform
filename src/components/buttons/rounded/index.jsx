@@ -4,10 +4,6 @@ import CrudService from "services/CrudService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class KwetterComponentButtonRounded extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   submit(event) {
     if (!!event) {
       this.getServiceEndpoint(event);

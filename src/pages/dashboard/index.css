@@ -1,0 +1,42 @@
+.user-overview {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.user-overview td,
+.user-overview th {
+  border: 1px solid var(--app-lightgray);
+  padding: 8px;
+  width: 1%;
+  white-space: nowrap;
+}
+
+.user-overview th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--app-primary-color);
+  color: white;
+}
+
+.user-overview tr:nth-child(even) {
+  background-color: var(--app-lightgray);
+}
+
+.user-overview tr:hover {
+  background-color: var(--app-accent-light-color);
+}
+
+.table-label {
+  display: block;
+  text-align: center;
+}
+
+.table-input {
+  width: auto;
+}
+
+.user-overview tr {
+  cursor: pointer;
+}

@@ -6,9 +6,8 @@ import SockJsClient from "react-stomp";
 import TimelineService from "services/TimelineService";
 import { connect } from "react-redux";
 import { setTimeline, setOwnTweets } from "redux/actions";
-import { Client } from "@stomp/stompjs";
 
-const WEB_SOCKET_URL = process.env.REACT_APP_SOCKET_API;
+const WEB_SOCKET_URL = "http://20.101.19.51/"; //process.env.REACT_APP_SOCKET_API;
 
 const mapStateToProps = (state) => {
   return {
@@ -160,7 +159,7 @@ class KwetterComponentTimeLine extends Component {
             <KwetterComponentFormTweet />
             <div className="timeline-space"></div>
             <SockJsClient
-              url={process.env.REACT_APP_SOCKET_API}
+              url={WEB_SOCKET_URL}
               topics={["/queue/timeline"]}
               onConnect={this.onConnected}
               onMessage={(msg) => this.onTweetReceived(msg)}

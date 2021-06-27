@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./index.css";
 
 class KwetterComponentCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   retrieveItems(trends) {
     if (!!trends && trends.length > 0) {
       return trends.map((item) => (
