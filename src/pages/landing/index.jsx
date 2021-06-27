@@ -4,11 +4,11 @@ import KwetterComponentButtonRounded from "components/buttons/rounded";
 
 class LandingPage extends Component {
   registerClicked() {
-    window.location.replace("http://localhost:3000/signup");
+    window.location.replace("http://20.86.242.101:3000/signup");
   }
 
   loginClicked() {
-    window.location.replace("http://localhost:3000/signin");
+    window.location.replace("http://20.86.242.101:3000/signin");
   }
 
   render() {

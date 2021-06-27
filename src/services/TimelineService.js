@@ -7,7 +7,7 @@ class TimelineService {
   async retrieveTimeline(username) {
     return await axios.get(`${TIMELINE_API_URL}/unique?username=` + username, {
       withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
+      headers: { "Access-Control-Allow-Origin": "http://20.86.242.101:3000" },
     });
   }
 

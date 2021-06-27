@@ -103,9 +103,9 @@ class LoginComponent extends Component {
 
     if (loginSuccessful) {
       if (!!user && user.role === "KWETTER_ADMIN") {
-        window.location.replace("http://localhost:3000/dashboard");
+        window.location.replace("http://20.86.242.101:3000/dashboard");
       } else {
-        window.location.replace("http://localhost:3000/home");
+        window.location.replace("http://20.86.242.101:3000/home");
       }
     }
 

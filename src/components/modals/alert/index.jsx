@@ -29,7 +29,7 @@ class KwetterComponentAlertModal extends Component {
         AuthService.logout().then((res) => {
           if (res.status === 200) {
             window.localStorage.removeItem("persist:root");
-            window.location.replace("http://localhost:3000/signin");
+            window.location.replace("http://20.86.242.101:3000/signin");
           }
         });
       }

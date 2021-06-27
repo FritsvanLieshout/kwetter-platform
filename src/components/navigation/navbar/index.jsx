@@ -41,7 +41,7 @@ class KwetterComponentNavBar extends Component {
       if (res.status === 200 || res.status === 404 || res.status === 302) {
         console.log(res.data);
         window.localStorage.removeItem("persist:root");
-        window.location.replace("http://localhost:3000/signin");
+        window.location.replace("http://20.86.242.101:3000/signin");
       }
     });
   }

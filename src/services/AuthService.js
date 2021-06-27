@@ -26,7 +26,7 @@ class AuthService {
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "http://20.86.242.101:3000",
         },
       }
     );
@@ -36,7 +36,7 @@ class AuthService {
     return await axios.put(`${AUTH_API_URL}/logout`, "", {
       withCredentials: true,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": "http://20.86.242.101:3000",
       },
     });
   }
