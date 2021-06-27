@@ -20,6 +20,8 @@ import {
   faSignOutAlt,
   faTachometerAlt,
   faExclamationTriangle,
+  faBook,
+  faBug,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { createGlobalStyle } from "styled-components";
@@ -38,7 +40,9 @@ library.add(
   faEllipsisH,
   faSignOutAlt,
   faTachometerAlt,
-  faExclamationTriangle
+  faExclamationTriangle,
+  faBook,
+  faBug
 );
 
 const GlobalStyles = createGlobalStyle`

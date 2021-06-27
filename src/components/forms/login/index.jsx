@@ -99,9 +99,14 @@ class LoginComponent extends Component {
 
   render() {
     let { username, password, message, loginSuccessful } = this.state;
+    let { user } = this.props;
 
     if (loginSuccessful) {
-      window.location.replace("http://localhost:3000/home");
+      if (!!user && user.role === "KWETTER_ADMIN") {
+        window.location.replace("http://localhost:3000/dashboard");
+      } else {
+        window.location.replace("http://localhost:3000/home");
+      }
     }
 
     return (

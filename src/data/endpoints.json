@@ -30,10 +30,26 @@
       "unique": true,
       "label": "Profile",
       "icon": "user",
-      "roles": ["KWETTER_USER"]
+      "roles": ["KWETTER_USER", "KWETTER_ADMIN"]
     },
     {
       "id": 4,
+      "endpoint": "/logging",
+      "unique": false,
+      "label": "Logging",
+      "icon": "book",
+      "roles": ["KWETTER_ADMIN"]
+    },
+    {
+      "id": 5,
+      "endpoint": "/issues",
+      "unique": false,
+      "label": "Issues",
+      "icon": "bug",
+      "roles": ["KWETTER_ADMIN"]
+    },
+    {
+      "id": 6,
       "endpoint": "/settings",
       "unique": false,
       "label": "Settings",
@@ -41,7 +57,7 @@
       "roles": ["KWETTER_USER", "KWETTER_ADMIN"]
     },
     {
-      "id": 5,
+      "id": 7,
       "endpoint": "logout",
       "unique": false,
       "label": "Logout",

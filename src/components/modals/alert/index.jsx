@@ -25,13 +25,13 @@ class KwetterComponentAlertModal extends Component {
     AuthService.deleteUser(user).then((response) => {
       if (response.status === 200) {
         console.log(response);
-      }
-    });
 
-    AuthService.logout().then((res) => {
-      if (res.status === 200) {
-        window.localStorage.removeItem("persist:root");
-        window.location.replace("http://localhost:3000/signin");
+        AuthService.logout().then((res) => {
+          if (res.status === 200) {
+            window.localStorage.removeItem("persist:root");
+            window.location.replace("http://localhost:3000/signin");
+          }
+        });
       }
     });
   }

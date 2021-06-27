@@ -117,11 +117,8 @@ class KwetterComponentTweet extends Component {
   checkIfAlreadyLiked(tweetId) {
     const likes = this.props.likes;
     if (!!likes && likes.length > 0) {
-      for (var like of likes) {
-        console.log(like + ", " + tweetId);
-        if (like === tweetId) {
-          this.setState({ alreadyLiked: true });
-        }
+      if (likes.includes(tweetId)) {
+        this.setState({ alreadyLiked: true });
       }
     }
   }
@@ -135,6 +132,7 @@ class KwetterComponentTweet extends Component {
   }
 
   actionLike(tweetId, alreadyLiked) {
+    console.log(alreadyLiked, tweetId);
     if (alreadyLiked) {
       LikeService.unLikeTweet(this.props.user.userId, tweetId).then(
         (response) => {

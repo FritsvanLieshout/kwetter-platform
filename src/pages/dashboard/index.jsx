@@ -2,58 +2,57 @@ import React, { Component } from "react";
 import "./index.css";
 import KwetterComponentNavBar from "components/navigation/navbar";
 import ModeratorForm from "components/forms/moderator";
+import ModerationService from "services/ModerationService";
+import { connect } from "react-redux";
 
-const users = [
-  {
-    id: 1,
-    username: "fritsjhuuu1",
-    nickName: "Frits van Lieshout",
-    biography: "Voetballer",
-    verified: true,
-    role: "KWETTER_ADMIN",
-  },
-  {
-    id: 2,
-    username: "kevindebruyne",
-    nickName: "KDB",
-    biography: "Rode Duivel",
-    verified: false,
-    role: "KWETTER_USER",
-  },
-];
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 class DashboardPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: {
-        username: "fritsjhuuu1",
-        nickName: "FVL",
-        biography: "PSV",
-        verified: true,
-        role: "KWETTER_ADMIN",
-      },
+      user: null,
+      users: null,
     };
   }
 
+  componentDidMount() {
+    this.initUsers();
+  }
+
+  initUsers() {
+    ModerationService.retrieveUsers().then((response) => {
+      if (response.status === 200) {
+        this.setState({ users: response.data });
+      }
+    });
+  }
+
   setSelectedUser(user) {
+    if (!!this.props.user && this.props.user.username === user.username) {
+      return;
+    }
+    this.setState({ user: user });
     var moderator = document.getElementById("moderator-popup");
     moderator.style.display = "block";
-    this.setState({ user: user });
   }
 
   render() {
-    let { user } = this.state;
+    let { user, users } = this.state;
 
     return (
       <div className="container">
         <div className="left">
           <KwetterComponentNavBar />
         </div>
-        <div className="center">
+        <div className="center" style={{ marginLeft: "-150px" }}>
           <table className="user-overview">
-            <tr key={0}>
+            <tr key={0} style={{ cursor: "default" }}>
               <th>ID</th>
               <th>Username</th>
               <th>Nickname</th>
@@ -61,8 +60,7 @@ class DashboardPage extends Component {
               <th>Verified</th>
               <th>role</th>
             </tr>
-            {!!users &&
-              users.length > 0 &&
+            {!!users && users.length > 0 ? (
               users.map((user) => (
                 <tr key={user.id} onClick={() => this.setSelectedUser(user)}>
                   <td>{user.id}</td>
@@ -81,14 +79,19 @@ class DashboardPage extends Component {
                   </td>
                   <td>{user.role}</td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr key={1} style={{ cursor: "default", textAlign: "center" }}>
+                <td colSpan="6">No users found :(</td>
+              </tr>
+            )}
           </table>
         </div>
         <div
           className="right"
           style={{
             marginLeft: "20px",
-            width: "25%",
+            width: "20%",
           }}
         >
           <ModeratorForm user={user} />
@@ -98,4 +101,4 @@ class DashboardPage extends Component {
   }
 }
 
-export default DashboardPage;
+export default connect(mapStateToProps)(DashboardPage);

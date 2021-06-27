@@ -8,6 +8,8 @@
 .user-overview th {
   border: 1px solid var(--app-lightgray);
   padding: 8px;
+  width: 1%;
+  white-space: nowrap;
 }
 
 .user-overview th {

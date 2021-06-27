@@ -25,3 +25,7 @@
   border-radius: 20px;
   background-color: var(--app-accent-color);
 }
+
+#moderator-popup {
+  display: block;
+}

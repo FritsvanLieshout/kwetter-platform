@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setUser, setFollowing, setFollowers, setLikes } from "redux/actions";
-import AuthService from "services/AuthService";
 import FollowService from "services/FollowService";
 import "./index.css";
 
@@ -65,30 +64,6 @@ class HomePage extends Component {
       this.setState({ userFetched: true, message: null });
     }
   }
-
-  // fetchUser() {
-  //   AuthService.getUser()
-  //     .then(
-  //       (response) => {
-  //         if (response.status === 200 || response.status === 201) {
-  //           this.props.setUser(response.data);
-  //           this.initFollowers(response.data.username);
-  //           this.initFollowing(response.data.username);
-  //           this.initLikes(response.data.userId);
-  //           this.setState({ userFetched: true, message: null });
-  //         }
-  //       },
-  //       (error) => {
-  //         this.setState({ message: error.response.data.message });
-  //       }
-  //     )
-  //     .catch(() => {
-  //       this.setState({
-  //         message:
-  //           "Sorry, Server Unavailable. Please contact us or check your internet connection!",
-  //       });
-  //     });
-  // }
 
   initFollowers(username) {
     FollowService.getFollowers(username)

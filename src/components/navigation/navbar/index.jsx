@@ -40,31 +40,42 @@ class KwetterComponentNavBar extends Component {
     AuthService.logout().then((res) => {
       if (res.status === 200 || res.status === 404 || res.status === 302) {
         console.log(res.data);
+        window.localStorage.removeItem("persist:root");
+        window.location.replace("http://localhost:3000/signin");
       }
-      window.localStorage.removeItem("persist:root");
-      window.location.replace("http://localhost:3000/signin");
     });
   }
 
   render() {
     let { menu } = this.state;
-    //let { user } = this.props;
+    let { user } = this.props;
 
-    const user = { role: "KWETTER_ADMIN" };
-    console.log(user);
-
-    //TODO user info below in navbar
     return (
       <div className="sidebar-container">
         <div className="sidebar-header">Kwetter</div>
         <div className="sidebar-body">
           {!!user && user !== null ? (
             menu &&
-            menu.map((item) =>
-              item.roles.includes(user.role) ? (
-                (item.unique === true && (
+            menu.map(
+              (item) =>
+                item.roles.includes(user.role) &&
+                (item.endpoint === "logout" ? (
+                  <div className="sidebar-item">
+                    <KwetterComponentButtonTransparent
+                      key={item.id}
+                      label={item.label}
+                      icon={item.icon}
+                      style={{ width: "auto" }}
+                      onClick={this.logout}
+                    />
+                  </div>
+                ) : (
                   <Link
-                    to={item.endpoint + "/" + user.username}
+                    to={
+                      item.unique === true
+                        ? item.endpoint + "/" + user.username
+                        : item.endpoint
+                    }
                     className="sidebar-item"
                   >
                     <KwetterComponentButtonTransparent
@@ -75,32 +86,7 @@ class KwetterComponentNavBar extends Component {
                       style={{ width: "auto" }}
                     />
                   </Link>
-                ),
-                item.endpoint === "logout" && (
-                  <div className="sidebar-item">
-                    <KwetterComponentButtonTransparent
-                      key={item.id}
-                      label={item.label}
-                      icon={item.icon}
-                      style={{ width: "auto" }}
-                      onClick={this.logout}
-                    />
-                  </div>
-                ),
-                (
-                  <Link to={item.endpoint} className="sidebar-item">
-                    <KwetterComponentButtonTransparent
-                      key={item.id}
-                      endpoint={item.endpoint}
-                      label={item.label}
-                      icon={item.icon}
-                      style={{ width: "auto" }}
-                    />
-                  </Link>
                 ))
-              ) : (
-                <div></div>
-              )
             )
           ) : (
             <div></div>
